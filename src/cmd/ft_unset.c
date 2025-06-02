@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:33 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:34 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:53:37 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_delete_env_var(t_ms *ms, char *name)
 	current = ms->locals;
 	while (current)
 	{
-		if (ft_compare_strings(current->name, name))
+		if (ft_is_str_equal(current->name, name))
 		{
 			target = current;
 			if (prev)

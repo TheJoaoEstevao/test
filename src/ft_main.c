@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:52:02 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 13:15:41 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:16:32 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	ft_process_input(t_ms *ms)
 	ft_check_empty_line(ms);
 	add_history(ms->buff);
 	ms->line_count++;
-	ft_open_pipe(ms);
 	ft_space_pipes(ms, ms->buff - 1);
 	if (!ft_process_tokens(ms))
 		return ;

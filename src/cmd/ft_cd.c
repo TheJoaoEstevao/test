@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:10 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:11 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:10:33 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
-
-static int	ft_ch_to_home_tilde(t_ms *ms)
-{
-	char	*home_path;
-
-	home_path = ft_get_env_value(ms, "HOME");
-	if (!home_path)
-	{
-		ms->code = 1;
-		ft_print_error_four("cd: ", "HOME not set", "", "");
-		return (1);
-	}
-	else if (chdir(home_path) == -1)
-	{
-		ms->code = errno;
-		ft_print_error_four("cd: ", home_path, ": ", strerror(errno));
-		free(home_path);
-		return (1);
-	}
-	else
-		ft_update_env_value(ms, "PWD", home_path);
-	if (home_path)
-		free(home_path);
-	return (0);
-}
 
 static int	ft_change_to_home(t_ms *ms)
 {
@@ -45,13 +20,13 @@ static int	ft_change_to_home(t_ms *ms)
 	if (!home_path)
 	{
 		ms->code = 1;
-		ft_print_error_four("cd: ", "HOME not set", "", "");
+		ft_error_msg("cd: ", "HOME not set", NULL, NULL);
 		return (2);
 	}
 	if (chdir(home_path) == -1)
 	{
 		ms->code = 1;
-		ft_print_error_four("cd: ", home_path, ": ", strerror(errno));
+		ft_error_msg("cd: ", home_path, ": ", strerror(errno));
 		free(home_path);
 		return (2);
 	}
@@ -69,11 +44,6 @@ static t_bool	ft_check_home_path(t_ms *ms, char **cmds)
 		ft_change_to_home(ms);
 		return (TRUE);
 	}
-	if (cmds && ft_compare_strings(cmds[1], "~"))
-	{
-		ft_ch_to_home_tilde(ms);
-		return (TRUE);
-	}
 	return (FALSE);
 }
 
@@ -86,7 +56,7 @@ static int	ft_update_pwd(t_ms *ms)
 	if (!current_path)
 	{
 		ms->code = errno;
-		ft_print_error_four("getcwd error: ", "", "", strerror(errno));
+		ft_error_msg("getcwd error: ", strerror(errno), NULL, NULL);
 		return (errno);
 	}
 	ft_update_env_value(ms, "PWD", current_path);
@@ -104,12 +74,12 @@ int	ft_cd(t_ms *ms, char **cmds)
 	if (ft_strlen_matrix(cmds) > 2)
 	{
 		ms->code = 1;
-		ft_print_error_four("cd: ", "too many arguments", "", "");
+		ft_error_msg("cd: ", "too many arguments", NULL, NULL);
 		return (1);
 	}
 	else if (cmds[1][0] && chdir(cmds[1]) == -1)
 	{
-		ft_print_error_four("cd: ", cmds[1], ": ", strerror(errno));
+		ft_error_msg("cd: ", cmds[1], ": ", strerror(errno));
 		return (1);
 	}
 	else

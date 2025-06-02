@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:17 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 12:48:09 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:12:39 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,12 @@ void	ft_exit(t_ms *ms, char **cmds)
 			|| !ft_check_longlong(cmds[1])))
 	{
 		exit_code = 2;
-		ft_print_error_three(ms, "exit: ",
-			cmds[1], ": numeric argument required");
+		ft_error_msg("exit: ", cmds[1], ": numeric argument required", NULL);
 	}
 	else if (ft_strlen_matrix(cmds) > 2)
 	{
 		ms->code = 1;
-		ft_print_error_four("exit: ", "", "", "too many arguments");
+		ft_error_msg("exit: too many arguments", NULL, NULL, NULL);
 		ft_reset_shell_state(ms);
 	}
 	else

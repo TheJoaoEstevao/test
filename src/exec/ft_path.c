@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_path.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:51 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:52 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:28:14 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	ft_is_absolute_path(char *path)
 {
-	if (ft_strchr(path, '/') != NULL)
+	if (ft_is_present(path, '/'))
 	{
 		if (access(path, X_OK) == 0)
 			return (TRUE);
@@ -57,7 +57,7 @@ char	*ft_find_command_path(char *cmd, t_ms *ms)
 
 void	ft_handle_null_path(t_ms *ms, char **cmds)
 {
-	if (ft_strchr(cmds[0], '/') != NULL)
+	if (ft_is_present(cmds[0], '/'))
 	{
 		if (access(cmds[0], F_OK))
 			ft_cmd_not_exist(ms, cmds[0], 2, NULL);
@@ -68,7 +68,7 @@ void	ft_handle_null_path(t_ms *ms, char **cmds)
 	}
 	else if (cmds[0][0] == '=')
 		ft_cmd_not_found(ms, cmds[0]);
-	else if (ft_strchr(cmds[0] + 1, '=') != NULL)
+	else if (ft_is_present(cmds[0] + 1, '='))
 		ft_cleanup_and_exit(ms, 4);
 	else
 		ft_cmd_not_found(ms, cmds[0]);

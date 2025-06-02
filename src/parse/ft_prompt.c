@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prompt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:28 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:29 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:11:41 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*ft_get_current_dir(t_ms *ms)
 	if (pwd == NULL)
 	{
 		ms->code = 1;
-		ft_print_error_four("getcwd error: ", "", "", strerror(errno));
+		ft_error_msg("getcwd error: ", strerror(errno), NULL, NULL);
 	}
 	return (pwd);
 }

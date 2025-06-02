@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:00 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 12:51:29 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:28:54 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_expand_env_vars(t_ms *ms, char *input, char **line)
 			ms->track->d_quote = !ms->track->d_quote;
 		if (*input == '\'' && !ms->track->d_quote)
 			ms->track->s_quote = !ms->track->s_quote;
-		if (*input == '$' && !ft_strchr(SYNTAX_CHARS, *(input + 1))
+		if (*input == '$' && !ft_is_present(SYNTAX_CHARS, *(input + 1))
 			&& !ms->track->s_quote && !((ms->track->d_quote
 					|| ms->track->s_quote) && (*(input + 1) == '"'
 					|| *(input + 1) == '\'')))

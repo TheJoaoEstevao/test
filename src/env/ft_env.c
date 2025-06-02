@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:37 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:38 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:32:06 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,20 @@ char	*ft_extract_env_name(char *env_str)
 char	*ft_extract_env_value(char *env_str)
 {
 	char	*value;
-	char	*equal_pos;
+	int		equal_pos;
 	int		len;
 
-	equal_pos = ft_strchr(env_str, '=');
-	if (equal_pos)
+	if (!ft_is_present(env_str, '='))
+		return (NULL);
+	equal_pos = 0;
+	while (env_str[equal_pos] && env_str[equal_pos] != '=')
+		equal_pos++;
+	if (env_str[equal_pos] == '=')
 	{
-		len = ft_strlen(equal_pos + 1);
+		len = ft_strlen(env_str + equal_pos + 1);
 		value = ft_calloc(1, sizeof(char) * (len + 1));
 		if (value)
-			return (ft_memcpy(value, equal_pos + 1, len), value);
+			return (ft_memcpy(value, env_str + equal_pos + 1, len), value);
 	}
 	return (NULL);
 }

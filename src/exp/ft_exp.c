@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:05 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 12:51:53 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:28:45 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int	ft_handle_pipe_spacing(t_ms *ms, char *str)
 {
-	if (str != ms->buff && !ft_strchr(DELIMS, *(str - 1)))
+	if (str != ms->buff && !ft_is_present(DELIMS, *(str - 1)))
 		return (ft_expand_command_str(" ", str - ms->buff,
 				str - ms->buff, &ms->buff));
-	if (!ft_strchr(DELIMS, *(str + 1)))
+	if (!ft_is_present(DELIMS, *(str + 1)))
 		return (ft_expand_command_str(" ", str - ms->buff + 1,
 				str - ms->buff + 1, &ms->buff));
 	return (0);
@@ -74,7 +74,7 @@ void	ft_expand_commands(char ***cmds, t_ms *ms)
 	ms->matrix = cmds;
 	while ((*cmds)[++ms->track->phrase])
 	{
-		ms->processed = (ft_strchr((*cmds)[ms->track->phrase], '$') != NULL);
+		ms->processed = ft_is_present((*cmds)[ms->track->phrase], '$');
 		ft_expand_env_vars(ms, (*cmds)[ms->track->phrase] - 1,
 			&(*cmds)[ms->track->phrase]);
 		if (ms->track->phrase == -1)

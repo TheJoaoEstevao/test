@@ -6,22 +6,11 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:39 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 13:14:38 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:33:33 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
-
-t_bool	ft_is_present(const char *str, char c)
-{
-	while (*str)
-	{
-		if (*str == c)
-			return (TRUE);
-		str++;
-	}
-	return (FALSE);
-}
 
 int	ft_get_token_type(char *word, t_ms *ms)
 {

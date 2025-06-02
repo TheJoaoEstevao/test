@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:07 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:08 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:19:08 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,23 +33,17 @@ t_bool	ft_check_operator_sequence(t_token *lexer)
 	return (FALSE);
 }
 
-int	ft_print_error_three(t_ms *sh, char *str1, char *str2, char *str3)
+void	ft_error_msg(char *s1, char *s2, char *s3, char *s4)
 {
 	ft_putstr_fd("[minishell]: ", 2);
-	ft_putstr_fd(str1, 2);
-	ft_putstr_fd(str2, 2);
-	ft_putstr_fd(str3, 2);
-	ft_putstr_fd("\n", 2);
-	return (sh->code);
-}
-
-void	ft_print_error_four(char *str1, char *str2, char *str3, char *str4)
-{
-	ft_putstr_fd("[minishell]: ", 2);
-	ft_putstr_fd(str1, 2);
-	ft_putstr_fd(str2, 2);
-	ft_putstr_fd(str3, 2);
-	ft_putstr_fd(str4, 2);
+	if (s1)
+		ft_putstr_fd(s1, 2);
+	if (s2)
+		ft_putstr_fd(s2, 2);
+	if (s3)
+		ft_putstr_fd(s3, 2);
+	if (s4)
+		ft_putstr_fd(s4, 2);
 	ft_putstr_fd("\n", 2);
 }
 
@@ -71,17 +65,10 @@ t_bool	ft_check_empty_redirect(t_token *lexer)
 
 void	ft_syntax_error(char *token, t_ms *ms)
 {
-	static t_bool	error_printed = FALSE;
-
-	if (!error_printed)
-	{
-		ft_putstr_fd("[minishell]: syntax error near unexpected token `", 2);
-		if (token)
-			ft_putstr_fd(token, 2);
-		else
-			ft_putstr_fd("newline", 2);
-		ft_putstr_fd("'\n", 2);
-		error_printed = TRUE;
-	}
+	if (token)
+		ft_error_msg("syntax error near unexpected token `", token, "'", NULL);
+	else
+		ft_error_msg("syntax error near unexpected token `",
+			"newline", "'", NULL);
 	ms->code = 2;
 }

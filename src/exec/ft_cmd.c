@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:46 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 12:49:48 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:54:18 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_bool	ft_check_command(t_ms *ms, char **cmds)
 	char	*cmd_path;
 
 	cmd_path = NULL;
-	if (ft_strcmp(cmds[0], "export") == 0)
+	if (ft_is_str_equal(cmds[0], "export"))
 		return (TRUE);
 	if (ft_is_absolute_path(cmds[0]))
 	{
@@ -38,7 +38,7 @@ static void	ft_handle_path_error(t_ms *ms, char **cmds, char *cmd_path)
 {
 	if (cmd_path == NULL)
 	{
-		if (!ft_strchr(cmds[0], '/'))
+		if (!ft_is_present(cmds[0], '/'))
 		{
 			ft_putstr_fd("[minishell]: ", 2);
 			ft_putstr_fd(cmds[0], 2);

@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:22 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 12:46:35 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:16:50 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	ft_update_env_var(t_ms *ms, char *key, char *value, int scope)
 	t_var	*env_node;
 
 	env_node = NULL;
-	if (scope == 1 && ft_strcmp(key, "_")
+	if (scope == 1 && ft_is_str_equal(key, "_")
 		&& !ft_update_env_value(ms, key, value))
 	{
 		env_node = ft_create_env_node(key, value, 1);
 		ft_append_env_node(&ms->locals, env_node);
 	}
-	else if (!value && scope == 0 && ft_strcmp(key, "_"))
+	else if (!value && scope == 0 && ft_is_str_equal(key, "_"))
 	{
 		env_node = ft_create_env_node(key, value, 0);
 		ft_append_env_node(&ms->locals, env_node);
@@ -63,22 +63,24 @@ static int	ft_validate_key_chars(char *key, char *equals_pos)
 
 int	ft_validate_key(t_ms *ms, char *str)
 {
-	char	*equals_pos;
+	int		equals_pos;
 	char	*key;
 
 	if (!str || ft_strlen(str) == 0)
 		return (1);
 	(void)ms;
-	equals_pos = ft_strchr(str, '=');
-	if (equals_pos)
+	if (ft_is_present(str, '='))
 	{
-		key = ft_substr(str, 0, equals_pos - str);
+		equals_pos = 0;
+		while (str[equals_pos] && str[equals_pos] != '=')
+			equals_pos++;
+		key = ft_substr(str, 0, equals_pos);
 		if (!key)
 			return (1);
+		return (ft_validate_key_chars(key, key));
 	}
 	else
-		key = str;
-	return (ft_validate_key_chars(key, equals_pos));
+		return (ft_validate_key_chars(str, NULL));
 }
 
 int	ft_process_export(t_ms *ms, char *cmd)
@@ -90,7 +92,7 @@ int	ft_process_export(t_ms *ms, char *cmd)
 	{
 		key = ft_extract_env_name(cmd);
 		value = ft_extract_env_value(cmd);
-		if (ft_strchr(cmd, '='))
+		if (ft_is_present(cmd, '='))
 			ft_update_env_var(ms, key, value, 1);
 		else
 			ft_update_env_var(ms, key, value, 0);
@@ -115,8 +117,8 @@ int	ft_export(t_ms *ms, char **cmds)
 	{
 		if (ft_validate_key(ms, cmds[index]))
 		{
-			ft_print_error_four("export: '", cmds[index],
-				"': ", "not a valid identifier");
+			ft_error_msg("export: '",
+				cmds[index], "': not a valid identifier", NULL);
 			has_error = 1;
 		}
 		else

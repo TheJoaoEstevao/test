@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:21 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:22 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:55:57 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ft_convt_list_to_array(t_token *start, t_token *end, char ***cmd)
 		current = current->next;
 		i++;
 	}
-	(*cmd)[i] = NULL;
 }
 
 static t_cmd	*ft_create_pipe_node(void)

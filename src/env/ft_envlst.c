@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_envlst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:40 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:41 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:54:09 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*ft_get_env_value(t_ms *ms, char *name)
 	value = NULL;
 	while (ms->locals)
 	{
-		if (ft_compare_strings(name, ms->locals->name) && ms->locals->scope)
+		if (ft_is_str_equal(name, ms->locals->name) && ms->locals->scope)
 		{
 			if (ms->locals->value)
 				value = ft_strdup(ms->locals->value);
@@ -103,7 +103,7 @@ int	ft_update_env_value(t_ms *ms, char *name, char *new_value)
 	original = ms->locals;
 	while (ms->locals)
 	{
-		if (ft_compare_strings(name, ms->locals->name))
+		if (ft_is_str_equal(name, ms->locals->name))
 		{
 			free(ms->locals->value);
 			ms->locals->value = ft_strdup(new_value);

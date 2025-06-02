@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:49:47 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:49:48 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:13:11 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,8 @@ typedef struct s_ms
 }	t_ms;
 
 # define DELIMS        "\t\n\v\f\r "
-# define SYNTAX_CHARS  "|><&();{}/ \t\n\v\f\r"
-# define OP_CHARS      "<>|{}"
+# define SYNTAX_CHARS  "|></ \t\n\v\f\r"
+# define OP_CHARS      "<>|"
 # define MS_PREFIX     "[minishell]"
 # define HDOC_EOF_WARN "[minishell]: warning: here-doc delimited by \
 end-of-file (wanted"
@@ -135,11 +135,11 @@ int			ft_isdigit(int c);
 int			ft_isalnum(int c);
 int			ft_isspace(int c);
 long		ft_atol(const char *str);
-int			ft_strcmp(const char *s1, const char *s2);
+int			ft_is_str_equal(const char *s1, const char *s2);
 char		*ft_nl_strjoin(char *s1, char *s2);
 int			ft_count_words(char const *s, char c);
 void		ft_process_redirect_heredoc(t_ms *ms, t_token **in_redirs);
-char		*ft_strchr(const char *s, int c);
+
 char		*ft_itoa(int n);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		**ft_split(char const *s, char c);
@@ -165,12 +165,6 @@ void		ft_convt_list_to_array(t_token *start, t_token *end, char ***cmd);
 t_cmd		*ft_build_cmd_tree(t_token **start, t_ms *ms);
 void		ft_rm_quotes_hdoc(char *str);
 void		ft_check_hdoc(t_token *lexer, t_ms *ms);
-void		ft_hdoc_child(t_ms *ms);
-char		*ft_open_pipe(t_ms *ms);
-t_bool		ft_check_adjacent_pipes(char *str);
-void		ft_handle_pipe_child(t_ms *ms);
-t_bool		ft_is_leading_pipe(char *str);
-t_bool		ft_has_consecutive_pipes(char *str);
 char		*ft_strstr(char *haystack, char *needle);
 int			ft_remove_null_entries(char **cmds, int count);
 int			ft_expand_command_str(char *value, int start, int end, char **line);
@@ -206,7 +200,7 @@ int			ft_export(t_ms *ms, char **cmds);
 void		ft_export_print(t_ms *ms);
 int			ft_pwd(t_ms *ms);
 int			ft_unset(t_ms *ms, char **cmds);
-t_bool		ft_compare_strings(char *s1, char *s2);
+
 t_bool		ft_is_parent(char **cmd);
 t_bool		ft_is_child(char **cmd);
 int			ft_route(t_ms *ms, char **cmds);
@@ -222,16 +216,14 @@ void		ft_cleanup_and_exit(t_ms *ms, int i);
 void		ft_handle_heredoc_eof(t_ms *ms, int fd);
 t_bool		ft_check_operator_sequence(t_token *lexer);
 int			ft_validate_syntax(t_token *lexer);
-int			ft_print_error_three(t_ms *ms, char *str1, char *str2, char *str3);
-void		ft_print_error_four(char *str1, char *str2, char *str3, char *str4);
+void		ft_error_msg(char *s1, char *s2, char *s3, char *s4);
 t_bool		ft_check_empty_redirect(t_token *lexer);
 void		ft_syntax_error(char *token, t_ms *ms);
+void		ft_print_syntax_error(char *token);
 t_bool		ft_process_tokens(t_ms *ms);
 t_bool		ft_validate_final_syntax(t_token *curr, t_ms *ms);
 t_bool		ft_check_token_sequence(t_token *curr, t_ms *ms);
 t_bool		ft_is_empty_line(char *str);
-void		ft_print_syntax_error(char *token);
-int			ft_check_pipe_syntax(t_ms *ms, char *str);
 char		*ft_extract_env_value(char *mini_env);
 void		ft_init_env_list(t_ms *ms);
 void		ft_free_env_list(t_var *env_lst);

@@ -6,7 +6,7 @@
 #    By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 16:49:52 by jopedro3          #+#    #+#              #
-#    Updated: 2025/06/02 12:56:14 by jestevao         ###   ########.fr        #
+#    Updated: 2025/06/02 16:24:40 by jestevao         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,14 +23,14 @@ OBJ_DIR = obj
 NAME = minishell
 
 CMD_FILES = ft_main ft_pwd ft_echo ft_env ft_cd ft_exit ft_unset ft_export ft_export_print
-CLEAN_FILES = ft_clean_one ft_clean_two ft_clean_three ft_error ft_validate ft_cleanup
+CLEAN_FILES = ft_clean_one ft_clean_two ft_clean_three ft_error ft_more_syn ft_cleanup
 ENV_FILES = ft_utils ft_env ft_envlst
 EXEC_FILES = ft_exec ft_cmd ft_utils ft_path
 EXP_FILES = ft_exp ft_arg ft_utils
-HEREDOC_FILES = ft_utils ft_hdoc ft_pipe_one ft_pipe_two ft_syntax
+HEREDOC_FILES = ft_utils ft_hdoc ft_syntax
 TOKEN_FILES = ft_utils ft_token
 PARSE_FILES = ft_utils ft_parse ft_prompt
-SIG_FILES = ft_sig_one ft_sig_two
+SIG_FILES = ft_signal
 UTILS_FILES = ft_str_one ft_mem ft_print ft_char ft_gen ft_more ft_str_two ft_main_util
 
 FILES = ft_main \
@@ -56,7 +56,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME) -I $(INC)
-	@echo -e "\033[32mCompiled successfully!\033[0m"
+	@echo "\033[32mCompiled successfully!\033[0m"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
@@ -67,11 +67,11 @@ $(OBJ_DIR):
 
 clean:
 	@$(RM) $(OBJ_DIR)
-	@echo -e "\033[33mObject files removed!\033[0m"
+	@echo "\033[33mObject files removed!\033[0m"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo -e "\033[33mExecutable removed!\033[0m"
+	@echo "\033[33mExecutable removed!\033[0m"
 
 re: fclean all
 

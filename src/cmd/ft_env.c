@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:15 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 12:47:14 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:12:32 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	ft_env(t_ms *ms, char **cmds)
 	if (ft_strlen_matrix(cmds) > 1)
 	{
 		ms->code = 127;
-		return (ft_print_error_three(ms, "env: '",
-				cmds[1], "': No such" "file or directory"));
+		ft_error_msg("env: '", cmds[1], "': No such file or directory", NULL);
+		return (ms->code);
 	}
 	else
 		ft_print_env_list(ms);

@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_validate.c                                      :+:      :+:    :+:   */
+/*   ft_more_syn.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:43:36 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 12:44:36 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:11:02 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
+
+void	ft_print_syntax_error(char *token)
+{
+	ft_error_msg("syntax error near unexpected token `", token, "'", NULL);
+}
 
 int	ft_validate_syntax(t_token *lexer)
 {
@@ -21,8 +26,8 @@ int	ft_validate_syntax(t_token *lexer)
 		return (2);
 	while (curr)
 	{
-		if (curr->content[0] == '|' && ft_is_present(OP_CHARS, \
-curr->content[1]))
+		if (curr->content[0] == '|' && ft_is_present(OP_CHARS,
+				curr->content[1]))
 			return (2);
 		if (curr->content[0] == '<' && ft_is_present("|>", curr->content[1]))
 			return (2);

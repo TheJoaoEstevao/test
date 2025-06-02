@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:18 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:19 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 16:54:26 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	ft_process_heredoc_line(t_token *heredoc, t_ms *ms, char *line)
 		return (1);
 	}
 	ms->line_count++;
-	if (ft_strcmp(line, heredoc->limit) == 0)
+	if (ft_is_str_equal(line, heredoc->limit))
 	{
 		free(line);
 		return (1);
@@ -97,7 +97,7 @@ void	ft_create_heredoc(t_token *heredoc_node, t_ms *ms)
 		ft_setup_signals();
 		if (status > 128)
 		{
-			write(1, "\n", 1);
+			ft_putchar_fd('\n', 1);
 			ms->code = 130;
 			ft_free_token_list(ms->doc_list);
 			ms->doc_list = NULL;

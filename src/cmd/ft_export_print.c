@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export_print.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:20 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:21 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:17:52 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	ft_sort_env_list(t_var *env_list)
 		current = env_list;
 		while (current->next)
 		{
-			if (ft_strcmp(current->name, current->next->name) > 0)
+			if (ft_strncmp(current->name, current->next->name,
+					ft_strlen(current->name)
+					+ ft_strlen(current->next->name)) > 0)
 			{
 				ft_swap_env_vars(current, current->next);
 				swapped = 1;

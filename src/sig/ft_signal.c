@@ -1,16 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sig_two.c                                       :+:      :+:    :+:   */
+/*   ft_sig_one.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 16:51:33 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:34 by jopedro3         ###   ########.fr       */
+/*   Created: 2024/12/02 16:51:31 by jopedro3          #+#    #+#             */
+/*   Updated: 2025/06/02 16:18:35 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
+
+static void	ft_signal_refresh(int signo)
+{
+	if (signo == SIGINT)
+	{
+		g_signo = 130;
+		ft_putchar_fd('\n', 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+
+void	ft_handle_child_signal(int signo)
+{
+	if (signo == SIGINT || signo == SIGQUIT)
+		g_signo = 128 + signo;
+}
+
+void	ft_setup_signals(void)
+{
+	signal(SIGINT, ft_signal_refresh);
+	signal(SIGQUIT, SIG_IGN);
+}
 
 void	ft_update_exit_status(t_ms *ms, int status)
 {
@@ -28,9 +52,9 @@ void	ft_update_exit_status(t_ms *ms, int status)
 	else
 		ms->code = WEXITSTATUS(status);
 	if (ms->code == 130)
-		write(1, "\n", 1);
+		ft_putchar_fd('\n', 1);
 	else if (ms->code == 131)
-		write(1, "Quit: (core dumped)\n", 20);
+		ft_putendl_fd("Quit: (core dumped)", 1);
 }
 
 void	ft_handle_hdoc_signal(int signo)
