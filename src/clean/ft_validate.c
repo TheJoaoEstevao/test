@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_validate.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:43:36 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/17 12:44:04 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:44:36 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ int	ft_validate_syntax(t_token *lexer)
 	while (curr)
 	{
 		if (curr->content[0] == '|' && ft_is_present(OP_CHARS, \
-			curr->content[1]))
+curr->content[1]))
 			return (2);
 		if (curr->content[0] == '<' && ft_is_present("|>", curr->content[1]))
 			return (2);
 		if (curr->content[0] == '>' && ft_is_present("|<", curr->content[1]))
 			return (2);
-		if (curr->content[0] == '>' && curr->content[1] == '>' \
+		if (curr->content[0] == '>' && curr->content[1] == '>'
 			&& ft_is_present(OP_CHARS, curr->content[2]))
 			return (2);
-		if (curr->content[0] == '<' && curr->content[1] == '<' \
+		if (curr->content[0] == '<' && curr->content[1] == '<'
 			&& ft_is_present(OP_CHARS, curr->content[2]))
 			return (2);
 		curr = curr->next;

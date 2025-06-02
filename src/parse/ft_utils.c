@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:24 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:25 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:54:57 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static t_bool	ft_is_redirection_token(t_token *token)
 {
-	return (token->kind == TOK_RED_IN || token->kind == TOK_RED_OUT || \
-		token->kind == TOK_APPEND || token->kind == TOK_HEREDOC);
+	return (token->kind == TOK_RED_IN || token->kind == TOK_RED_OUT
+		|| token->kind == TOK_APPEND || token->kind == TOK_HEREDOC);
 }
 
-static void	ft_process_redirection_token(t_token **redir_list, \
-t_token *current, int *order, t_ms *ms)
+static void	ft_process_redirection_token(t_token **redir_list,
+	t_token *current, int *order, t_ms *ms)
 {
 	t_token	*new_redir;
 
-	new_redir = ft_create_token_node(ft_strdup(current->next->content), \
-	*order, ms);
+	new_redir = ft_create_token_node(ft_strdup(current->next->content),
+			*order, ms);
 	new_redir->kind = current->kind;
 	ft_add_token_back(redir_list, new_redir);
 	(*order)++;

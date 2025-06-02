@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:22 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:23 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:46:35 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	ft_update_env_var(t_ms *ms, char *key, char *value, int scope)
 	t_var	*env_node;
 
 	env_node = NULL;
-	if (scope == 1 && ft_strcmp(key, "_") && \
-		!ft_update_env_value(ms, key, value))
+	if (scope == 1 && ft_strcmp(key, "_")
+		&& !ft_update_env_value(ms, key, value))
 	{
 		env_node = ft_create_env_node(key, value, 1);
 		ft_append_env_node(&ms->locals, env_node);

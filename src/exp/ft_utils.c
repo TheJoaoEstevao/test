@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:07 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:08 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:52:37 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	ft_handle_valid_env(int pos, t_ms *ms, char *env_val, char **line)
 			ft_strlen(*line) - pos + ms->b_l + 1);
 	if (ms->track->d_quote)
 		ft_expand_command_str(env_val, pos, pos + ms->b_l, line);
-	else if (ft_count_words(env_val, ' ') > 1 && !pos && !tmp[0] && \
-		ft_strlen_matrix(*ms->matrix) == 1)
+	else if (ft_count_words(env_val, ' ') > 1 && !pos && !tmp[0]
+		&& ft_strlen_matrix(*ms->matrix) == 1)
 	{
 		trimmed = ft_strdup(env_val);
 		ft_update_command_array(ms, ft_trim_spaces(ms, trimmed), line);
@@ -80,7 +80,7 @@ void	ft_handle_valid_env(int pos, t_ms *ms, char *env_val, char **line)
 	else
 	{
 		trimmed = ft_strdup(env_val);
-		ft_expand_command_str(ft_trim_spaces(ms, trimmed), pos, \
+		ft_expand_command_str(ft_trim_spaces(ms, trimmed), pos,
 			pos + ms->b_l, line);
 		free(trimmed);
 	}

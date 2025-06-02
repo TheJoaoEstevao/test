@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+         #
+#    By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 16:49:52 by jopedro3          #+#    #+#              #
-#    Updated: 2024/12/02 16:49:53 by jopedro3         ###   ########.fr        #
+#    Updated: 2025/06/02 12:56:14 by jestevao         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 RM = rm -rf
 
-CFLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra
 LFLAGS = -lreadline
 
 INC = includes
@@ -29,8 +29,7 @@ EXEC_FILES = ft_exec ft_cmd ft_utils ft_path
 EXP_FILES = ft_exp ft_arg ft_utils
 HEREDOC_FILES = ft_utils ft_hdoc ft_pipe_one ft_pipe_two ft_syntax
 TOKEN_FILES = ft_utils ft_token
-PARSE_FILES = ft_utils ft_parse
-PROMPT_FILES = ft_prompt
+PARSE_FILES = ft_utils ft_parse ft_prompt
 SIG_FILES = ft_sig_one ft_sig_two
 UTILS_FILES = ft_str_one ft_mem ft_print ft_char ft_gen ft_more ft_str_two ft_main_util
 
@@ -57,7 +56,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME) -I $(INC)
-	@echo "\033[32mCompiled successfully!\033[0m"
+	@echo -e "\033[32mCompiled successfully!\033[0m"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
@@ -68,11 +67,11 @@ $(OBJ_DIR):
 
 clean:
 	@$(RM) $(OBJ_DIR)
-	@echo "\033[33mObject files removed!\033[0m"
+	@echo -e "\033[33mObject files removed!\033[0m"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "\033[33mExecutable removed!\033[0m"
+	@echo -e "\033[33mExecutable removed!\033[0m"
 
 re: fclean all
 

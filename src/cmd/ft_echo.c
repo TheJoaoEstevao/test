@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:13 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:14 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:45:15 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	ft_echo(char **cmds)
 	{
 		ft_putstr_fd(cmds[index], 1);
 		if (cmds[index + 1])
-			write(1, " ", 1);
+			ft_putchar_fd(' ', 1);
 		index++;
 	}
 	if (newline)
-		write(1, "\n", 1);
+		ft_putchar_fd('\n', 1);
 	return (0);
 }

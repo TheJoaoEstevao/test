@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_doc.c                                           :+:      :+:    :+:   */
+/*   ft_hdoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:10 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:11 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:52:51 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static void	ft_init_and_up_cache(t_token *current, t_ms *ms)
 		ms->cache = ft_nl_strjoin(ms->cache, "a");
 		free(old_cache);
 		ft_check_quote_pairs(current->next->content, ms);
-		if (ft_strchr(current->next->content, '"') || \
-			ft_strchr(current->next->content, '\''))
+		if (ft_strchr(current->next->content, '"')
+			|| ft_strchr(current->next->content, '\''))
 			ms->doc_state = 1;
 	}
 }

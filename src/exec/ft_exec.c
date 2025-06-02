@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:49 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:50 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:50:09 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static void	ft_child_process(t_ms *ms, t_cmd *node)
 		ft_cleanup_shell(ms);
 		exit(0);
 	}
-	if (node->cmds && ms->in_fd != STDIN_FILENO && \
-		ft_check_command(ms, node->cmds))
+	if (node->cmds && ms->in_fd != STDIN_FILENO
+		&& ft_check_command(ms, node->cmds))
 	{
 		dup2(ms->in_fd, STDIN_FILENO);
 		ft_close(ms->in_fd);
 	}
-	if (node->cmds && ms->out_fd != STDOUT_FILENO && \
-		ft_check_command(ms, node->cmds))
+	if (node->cmds && ms->out_fd != STDOUT_FILENO
+		&& ft_check_command(ms, node->cmds))
 	{
 		dup2(ms->out_fd, STDOUT_FILENO);
 		ft_close(ms->out_fd);

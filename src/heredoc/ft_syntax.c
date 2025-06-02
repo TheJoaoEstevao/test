@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_syntax.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:17:39 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/17 13:17:41 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:54:13 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ void	ft_expand_hdoc_vars(t_ms *sh, char *tmp, char **line)
 			dquote = !dquote;
 		if (*tmp == '\'' && !dquote)
 			squote = !squote;
-		if (*tmp == '$' && !ft_strchr(SYNTAX_CHARS, *(tmp + 1)) && \
-		!((dquote || squote) && (*(tmp + 1) == '"' || *(tmp + 1) == '\'')))
+		if (*tmp == '$' && !ft_strchr(SYNTAX_CHARS, *(tmp + 1))
+			&& !((dquote || squote) && (*(tmp + 1) == '"'
+					|| *(tmp + 1) == '\'')))
 		{
 			if (ft_expand_dollar(sh, tmp - *line, tmp, line))
 			{

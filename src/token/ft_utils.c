@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:39 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:40 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:14:38 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static void	ft_advance_word(char *str, int *j)
 			(*j)++;
 		return ;
 	}
-	while (str[*j] && !ft_is_present(DELIMS, str[*j]) && \
-	!ft_is_present(OP_CHARS, str[*j]))
+	while (str[*j] && !ft_is_present(DELIMS, str[*j])
+		&& !ft_is_present(OP_CHARS, str[*j]))
 	{
 		if (ft_is_present("\"\'", str[*j]))
 		{
@@ -82,13 +82,13 @@ void	ft_set_word_end(char *ui, t_ms *ms)
 	if (ui[ms->track->phrase] == '\"' || ui[ms->track->phrase] == '\'')
 	{
 		ft_advance_quote(ui, &ms->track->phrase, ui[ms->track->phrase]);
-		while (!ft_isspace(ui[ms->track->phrase]) && \
-		ui[ms->track->phrase] != '\0')
+		while (!ft_isspace(ui[ms->track->phrase])
+			&& ui[ms->track->phrase] != '\0')
 		{
-			if (ui[ms->track->phrase] == '\"' || \
-			ui[ms->track->phrase] == '\'')
-				ft_advance_quote(ui, &ms->track->phrase, \
-				ui[ms->track->phrase]);
+			if (ui[ms->track->phrase] == '\"'
+				|| ui[ms->track->phrase] == '\'')
+				ft_advance_quote(ui, &ms->track->phrase,
+					ui[ms->track->phrase]);
 			else
 				ft_advance_word(ui, &ms->track->phrase);
 		}

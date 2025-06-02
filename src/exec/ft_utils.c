@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:54 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:55 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:50:29 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	ft_cmd_not_found(t_ms *ms, const char *cmd)
 	exit(127);
 }
 
-void	ft_cmd_not_exist(t_ms *ms, const char *cmd, \
-int err_no, char *path)
+void	ft_cmd_not_exist(t_ms *ms, const char *cmd, int err_no, char *path)
 {
 	if (path)
 		free(path);

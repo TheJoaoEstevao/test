@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:52:02 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:52:03 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:15:41 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_init_shell(t_ms *ms, char **env)
 	ms->context = ft_copy_env_array(env);
 	ft_init_env_list(ms);
 	home = ft_get_env_value(ms, "HOME");
- 	ms->home = home;
+	ms->home = home;
 	ms->track = ft_calloc(1, sizeof(t_track));
 	ms->out_fd = STDOUT_FILENO;
 	ms->exec_num = 1;

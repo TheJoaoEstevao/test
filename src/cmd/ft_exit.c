@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:17 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:18 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:48:09 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ void	ft_exit(t_ms *ms, char **cmds)
 	exit_code = 0;
 	if (ft_strlen_matrix(cmds) == 1)
 		exit_code = 0;
-	else if (cmds[1] && (!ft_is_exit_num(cmds[1]) || \
-	!ft_check_longlong(cmds[1])))
+	else if (cmds[1] && (!ft_is_exit_num(cmds[1])
+			|| !ft_check_longlong(cmds[1])))
 	{
 		exit_code = 2;
-		ft_print_error_three(ms, "exit: ", cmds[1], \
-		": numeric argument required");
+		ft_print_error_three(ms, "exit: ",
+			cmds[1], ": numeric argument required");
 	}
 	else if (ft_strlen_matrix(cmds) > 2)
 	{

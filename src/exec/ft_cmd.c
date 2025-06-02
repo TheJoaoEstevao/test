@@ -3,56 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:46 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:47 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:49:48 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
 
-t_bool	ft_check_command(t_ms *ms, char **commands)
+t_bool	ft_check_command(t_ms *ms, char **cmds)
 {
-	char	*command_path;
+	char	*cmd_path;
 
-	command_path = NULL;
-	if (ft_strcmp(commands[0], "export") == 0)
+	cmd_path = NULL;
+	if (ft_strcmp(cmds[0], "export") == 0)
 		return (TRUE);
-	if (ft_is_absolute_path(commands[0]))
+	if (ft_is_absolute_path(cmds[0]))
 	{
-		command_path = ft_strdup(commands[0]);
-		if (chdir(commands[0]) == 0)
-			ft_cmd_not_exist(ms, commands[0], 21, command_path);
+		cmd_path = ft_strdup(cmds[0]);
+		if (chdir(cmds[0]) == 0)
+			ft_cmd_not_exist(ms, cmds[0], 21, cmd_path);
 	}
-	else if (commands[0][0])
-		command_path = ft_find_command_path(commands[0], ms);
-	if (!command_path)
+	else if (cmds[0][0])
+		cmd_path = ft_find_command_path(cmds[0], ms);
+	if (!cmd_path)
 		return (FALSE);
 	else
-		free(command_path);
+		free(cmd_path);
 	return (TRUE);
 }
 
-static void	ft_handle_path_error(t_ms *ms, char **commands, char *command_path)
+static void	ft_handle_path_error(t_ms *ms, char **cmds, char *cmd_path)
 {
-	if (command_path == NULL)
+	if (cmd_path == NULL)
 	{
-		if (!ft_strchr(commands[0], '/'))
+		if (!ft_strchr(cmds[0], '/'))
 		{
 			ft_putstr_fd("[minishell]: ", 2);
-			ft_putstr_fd(commands[0], 2);
+			ft_putstr_fd(cmds[0], 2);
 			ft_putstr_fd(": command not found\n", 2);
 			ft_cleanup_and_exit(ms, 127);
 			exit(127);
 		}
-		ft_handle_null_path(ms, commands);
+		ft_handle_null_path(ms, cmds);
 	}
-	execve(command_path, commands, ms->context);
+	execve(cmd_path, cmds, ms->context);
 	if (errno == ENOEXEC)
 	{
 		ft_putstr_fd("[minishell]: ", 2);
-		ft_putstr_fd(commands[0], 2);
+		ft_putstr_fd(cmds[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
 		ft_cleanup_and_exit(ms, 2);
 		exit(126);
@@ -61,20 +61,20 @@ static void	ft_handle_path_error(t_ms *ms, char **commands, char *command_path)
 	exit(1);
 }
 
-void	ft_execute_command(t_ms *ms, char **commands)
+void	ft_execute_command(t_ms *ms, char **cmds)
 {
-	char	*command_path;
+	char	*cmd_path;
 
-	command_path = NULL;
-	if (ft_is_absolute_path(commands[0]))
+	cmd_path = NULL;
+	if (ft_is_absolute_path(cmds[0]))
 	{
-		command_path = ft_strdup(commands[0]);
-		if (chdir(commands[0]) == 0)
-			ft_cmd_not_exist(ms, commands[0], 21, command_path);
+		cmd_path = ft_strdup(cmds[0]);
+		if (chdir(cmds[0]) == 0)
+			ft_cmd_not_exist(ms, cmds[0], 21, cmd_path);
 	}
-	else if (commands[0][0])
-		command_path = ft_find_command_path(commands[0], ms);
-	ft_handle_path_error(ms, commands, command_path);
+	else if (cmds[0][0])
+		cmd_path = ft_find_command_path(cmds[0], ms);
+	ft_handle_path_error(ms, cmds, cmd_path);
 }
 
 static void	ft_process_redirection(t_ms *ms, t_cmd *node, t_token *temp)
@@ -113,8 +113,8 @@ void	ft_handle_redirections(t_ms *ms, t_cmd *node)
 			perror(temp->content);
 			ft_cleanup_and_exit(ms, 1);
 		}
-		if (temp->kind != TOK_RED_IN && !access(temp->content, F_OK) \
-		&& access(temp->content, W_OK))
+		if (temp->kind != TOK_RED_IN && !access(temp->content, F_OK)
+			&& access(temp->content, W_OK))
 		{
 			ft_putstr_fd("[minishell]: ", 2);
 			ft_putstr_fd(temp->content, 2);

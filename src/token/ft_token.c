@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:36 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:37 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 13:13:14 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ t_token	*ft_tokenize_input(char *ui, t_ms *ms)
 		else
 		{
 			ft_set_word_end(ui, ms);
-			word = ft_substr(ui, ms->track->cursor, \
-			ms->track->phrase - ms->track->cursor);
-			ft_add_token_back(&lexer, ft_create_token_node(word, \
-			ms->track->cursor, ms));
+			word = ft_substr(ui, ms->track->cursor,
+					ms->track->phrase - ms->track->cursor);
+			ft_add_token_back(&lexer, ft_create_token_node(word,
+					ms->track->cursor, ms));
 			ms->track->cursor = ms->track->phrase;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe_one.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:13 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:14 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:53:15 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char	*ft_open_pipe(t_ms *ms)
 		return (ms->buff);
 	if (ft_check_pipe_syntax(ms, trimmed))
 		return (free(trimmed), ms->buff);
-	if ((ft_check_adjacent_pipes(trimmed) || ft_has_consecutive_pipes(trimmed)) \
+	if ((ft_check_adjacent_pipes(trimmed) || ft_has_consecutive_pipes(trimmed))
 		|| ft_is_leading_pipe(trimmed))
 		return (free(trimmed), ms->buff);
 	return (ft_handle_pipe_loop(ms, trimmed));
