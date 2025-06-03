@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:00 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 10:49:25 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:55:01 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ int	ft_expand_dollar(t_ms *ms, int pos, char *input, char **line)
 		return (0);
 	if (input[1] == '?')
 		return (ft_expand_and_free(ft_itoa(ms->code), pos, pos + 2, line));
-	ms->b_l = 1;
-	while (ft_isalpha(input[ms->b_l]) || input[ms->b_l] == '_')
-		ms->b_l++;
-	ms->b_l += (ft_isalnum(input[ms->b_l]) > 0);
-	while (ms->b_l > 2 && (ft_isalnum(input[ms->b_l]) || input[ms->b_l] == '_'))
-		ms->b_l++;
-	name = ft_substr(input, 1, ms->b_l - 1);
+	ms->len = 1;
+	while (ft_isalpha(input[ms->len]) || input[ms->len] == '_')
+		ms->len++;
+	ms->len += (ft_isalnum(input[ms->len]) > 0);
+	while (ms->len > 2 && (ft_isalnum(input[ms->len]) || input[ms->len] == '_'))
+		ms->len++;
+	name = ft_substr(input, 1, ms->len - 1);
 	env_val = ft_get_env_value(ms, name);
 	if (env_val)
 		ft_handle_valid_env(pos, ms, env_val, line);
 	else
-		ft_expand_cmd_str("", pos, pos + ms->b_l, line);
+		ft_expand_cmd_str("", pos, pos + ms->len, line);
 	free(name);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:05 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 11:42:11 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:55:09 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	ft_expand_cmds(char ***cmds, t_ms *ms)
 			&(*cmds)[ms->track->phrase]);
 		if (ms->track->phrase == -1)
 			return ;
-		ms->b_l = ft_strlen((*cmds)[ms->track->phrase]);
-		ft_remove_quotes((*cmds)[ms->track->phrase], &ms->b_l);
+		ms->len = ft_strlen((*cmds)[ms->track->phrase]);
+		ft_remove_quotes((*cmds)[ms->track->phrase], &ms->len);
 		if (!(*cmds)[ms->track->phrase][0] && ms->processed)
 		{
 			free((*cmds)[ms->track->phrase]);

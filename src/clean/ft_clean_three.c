@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:02 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 10:35:01 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:32:28 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,4 @@ void	ft_cleanup_and_exit(t_ms *ms, int exit_code)
 	rl_clear_history();
 	ft_cleanup_shell(ms);
 	exit(exit_code);
-}
-
-void	ft_handle_heredoc_eof(t_ms *ms, int fd)
-{
-	printf("%s\nexit\n", ERROR_TOKEN);
-	ft_close(fd);
-	if (ms->doc_list)
-	{
-		ft_free_token_list(ms->doc_list);
-		ms->doc_list = NULL;
-	}
-	if (ms->cache)
-	{
-		free(ms->cache);
-		ms->cache = NULL;
-	}
-	rl_clear_history();
-	ft_cleanup_shell(ms);
-	exit(3);
 }

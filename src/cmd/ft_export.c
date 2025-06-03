@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:22 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 11:31:17 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:16:37 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ void	ft_update_env_var(t_ms *ms, char *name, char *value, int scope)
 	t_var	*env_node;
 
 	env_node = NULL;
-	if (scope == 1 && ft_is_str_equal(name, "_")
-		&& !ft_update_env_value(ms, name, value))
+	if (scope == 1 && !ft_update_env_value(ms, name, value))
 	{
 		env_node = ft_create_env_node(name, value, 1);
 		ft_append_env_node(&ms->locals, env_node);
 	}
-	else if (!value && scope == 0 && ft_is_str_equal(name, "_"))
+	else if (scope == 0 && !ft_update_env_value(ms, name, value))
 	{
 		env_node = ft_create_env_node(name, value, 0);
 		ft_append_env_node(&ms->locals, env_node);
@@ -107,7 +106,7 @@ int	ft_export(t_ms *ms, char **cmds)
 
 	index = 1;
 	has_error = 0;
-	if (!ft_strlen_matrix(cmds))
+	if (ft_strlen_matrix(cmds) == 1)
 	{
 		ft_export_print(ms);
 		return (0);

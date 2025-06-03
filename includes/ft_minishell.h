@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:49:47 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 12:14:33 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:50:04 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_ms
 	int				code;
 	int				doc_num;
 	int				doc_state;
-	int				b_l;
+	int				len;
 	int				processed;
 	int				exec_num;
 	int				**channels;
@@ -136,14 +136,12 @@ long		ft_atol(const char *str);
 int			ft_is_str_equal(const char *s1, const char *s2);
 char		*ft_nl_strjoin(char *s1, char *s2);
 int			ft_count_words(char const *s, char c);
-void		ft_process_redirect_heredoc(t_ms *ms, t_token **in_redirs);
 char		*ft_itoa(int n);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		**ft_split(char const *s, char c);
 void		ft_putendl_fd(char *s, int fd);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strtrim(char const *s1, char const *set);
-char		*ft_gnl(int fd);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		ft_handle_redirections(t_ms *ms, t_cmd *node);
 void		ft_close(int fd);
@@ -208,16 +206,11 @@ void		ft_free_pipe_array(t_ms *ms);
 void		ft_cleanup_heredoc(t_ms *ms);
 void		ft_free_cmd_tree(t_cmd *home);
 void		ft_cleanup_and_exit(t_ms *ms, int i);
-void		ft_handle_heredoc_eof(t_ms *ms, int fd);
 t_bool		ft_check_operator_sequence(t_token *lexer);
-int			ft_validate_syntax(t_token *lexer);
 void		ft_error_msg(char *s1, char *s2, char *s3, char *s4);
 t_bool		ft_check_empty_redirect(t_token *lexer);
 void		ft_syntax_error(char *token, t_ms *ms);
 t_bool		ft_process_tokens(t_ms *ms);
-t_bool		ft_validate_final_syntax(t_token *curr, t_ms *ms);
-t_bool		ft_check_token_sequence(t_token *curr, t_ms *ms);
-t_bool		ft_is_empty_line(char *str);
 char		*ft_extract_env_value(char *mini_env);
 void		ft_init_env_list(t_ms *ms);
 void		ft_free_env_list(t_var *env_lst);
@@ -232,7 +225,6 @@ void		ft_init_shell_vars(t_ms *ms);
 void		ft_cleanup_shell(t_ms *ms);
 void		ft_delete_token_pair(t_token **lexer, int name);
 void		ft_create_heredoc(t_token *heredoc_node, t_ms *ms);
-void		ft_delete_token(t_token *node);
 
 extern int	g_signo;
 

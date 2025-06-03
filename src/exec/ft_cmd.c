@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:46 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 11:57:10 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:49:13 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_bool	ft_check_cmd(t_ms *ms, char **cmds)
 	if (ft_is_absolute_path(cmds[0]))
 	{
 		cmd_path = ft_strdup(cmds[0]);
-		if (chdir(cmds[0]) == 0)
+		if (!chdir(cmds[0]))
 			ft_cmd_error_exit(ms, cmds[0], 21, cmd_path);
 	}
 	else if (cmds[0][0])
@@ -69,7 +69,7 @@ void	ft_execute_cmd(t_ms *ms, char **cmds)
 	if (ft_is_absolute_path(cmds[0]))
 	{
 		cmd_path = ft_strdup(cmds[0]);
-		if (chdir(cmds[0]) == 0)
+		if (!chdir(cmds[0]))
 			ft_cmd_error_exit(ms, cmds[0], 21, cmd_path);
 	}
 	else if (cmds[0][0])

@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:18 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 10:28:54 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:38:57 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ static int	ft_process_heredoc_line(t_token *heredoc, t_ms *ms, char *line)
 		return (1);
 	if (!line)
 	{
-		printf("%s `%s')\n", HDOC_EOF_WARN, heredoc->limit);
+		ft_putstr_fd(HDOC_EOF_WARN, 1);
+		ft_putstr_fd(" `", 1);
+		ft_putstr_fd(heredoc->limit, 1);
+		ft_putendl_fd("`)", 1);
 		return (1);
 	}
 	ms->line_count++;

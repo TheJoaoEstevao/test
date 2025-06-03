@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:17 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 11:22:20 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:34:57 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	ft_exit(t_ms *ms, char **cmds)
 {
 	unsigned long long	exit_code;
 
-	printf("exit\n");
+	ft_putendl_fd("exit", 1);
 	exit_code = 0;
-	if (!ft_strlen_matrix(cmds))
+	if (ft_strlen_matrix(cmds) == 1)
 		exit_code = 0;
 	else if (cmds[1] && (!ft_is_exit_num(cmds[1])
 			|| !ft_check_longlong(cmds[1])))

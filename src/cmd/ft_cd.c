@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:10 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 11:22:00 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:51:58 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_change_to_home(t_ms *ms)
 
 static t_bool	ft_check_home_path(t_ms *ms, char **cmds)
 {
-	if (cmds && !ft_strlen_matrix(cmds))
+	if (cmds && ft_strlen_matrix(cmds) == 1)
 	{
 		ft_change_to_home(ms);
 		return (TRUE);

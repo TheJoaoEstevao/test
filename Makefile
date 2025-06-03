@@ -6,7 +6,7 @@
 #    By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 16:49:52 by jopedro3          #+#    #+#              #
-#    Updated: 2025/06/03 12:22:44 by jestevao         ###   ########.fr        #
+#    Updated: 2025/06/03 13:50:25 by jestevao         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CLEAN_FILES = ft_clean_one ft_clean_two ft_clean_three ft_error ft_cleanup
 ENV_FILES = ft_utils ft_env ft_envlst
 EXEC_FILES = ft_exec ft_cmd ft_utils ft_path
 EXP_FILES = ft_exp ft_arg ft_utils
-HEREDOC_FILES = ft_utils ft_hdoc ft_syntax
+HEREDOC_FILES = ft_utils ft_hdoc
 TOKEN_FILES = ft_utils ft_token
 PARSE_FILES = ft_utils ft_parse ft_prompt
 SIG_FILES = ft_signal
@@ -49,7 +49,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LFLAGS) -o $(NAME) -I $(INC)
-	@echo "Compiled successfully!"
+	@echo "Ready to go!"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(INC)/ft_minishell.h
 	@mkdir -p $(dir $@)
@@ -60,15 +60,14 @@ $(OBJ_DIR):
 
 clean:
 	@$(RM) $(OBJ_DIR)
-	@echo "Object files removed!"
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo "Executable removed!"
+	@echo "Cleanup!"
 
 re: fclean all
 
-valgrind:
+valgrind: fclean all
 	valgrind --leak-check=full --show-leak-kinds=all -s \
 	--trace-children=yes --track-fds=yes --log-file=output.log ./minishell
 

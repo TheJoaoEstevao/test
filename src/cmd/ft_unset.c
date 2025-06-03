@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:33 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 11:21:11 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:51:59 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_unset(t_ms *ms, char **cmds)
 	int	index;
 
 	index = 1;
-	if (!ft_strlen_matrix(cmds))
+	if (ft_strlen_matrix(cmds) == 1)
 		return (0);
 	else
 	{
