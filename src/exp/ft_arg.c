@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:00 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 16:28:54 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:49:25 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_expand_dollar(t_ms *ms, int pos, char *input, char **line)
 {
-	char	*key;
+	char	*name;
 	char	*env_val;
 
 	if (g_signo == 130)
@@ -29,13 +29,13 @@ int	ft_expand_dollar(t_ms *ms, int pos, char *input, char **line)
 	ms->b_l += (ft_isalnum(input[ms->b_l]) > 0);
 	while (ms->b_l > 2 && (ft_isalnum(input[ms->b_l]) || input[ms->b_l] == '_'))
 		ms->b_l++;
-	key = ft_substr(input, 1, ms->b_l - 1);
-	env_val = ft_get_env_value(ms, key);
+	name = ft_substr(input, 1, ms->b_l - 1);
+	env_val = ft_get_env_value(ms, name);
 	if (env_val)
 		ft_handle_valid_env(pos, ms, env_val, line);
 	else
-		ft_expand_command_str("", pos, pos + ms->b_l, line);
-	free(key);
+		ft_expand_cmd_str("", pos, pos + ms->b_l, line);
+	free(name);
 	return (1);
 }
 
@@ -95,7 +95,7 @@ void	ft_expand_env_vars(t_ms *ms, char *input, char **line)
 	ft_check_quote_pairs(*line, ms);
 }
 
-void	ft_update_command_array(t_ms *ms, char *value, char **line)
+void	ft_update_cmd_array(t_ms *ms, char *value, char **line)
 {
 	int		idx;
 	char	**words;

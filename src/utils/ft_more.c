@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_more.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:52 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:53 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:47:41 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,50 +48,6 @@ char	*ft_nl_strjoin(char *s1, char *s2)
 			break ;
 	}
 	return (str);
-}
-
-static size_t	ft_reset_line(char *str)
-{
-	size_t	nl;
-	size_t	i;
-	size_t	j;
-
-	nl = 0;
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (nl)
-			str[j++] = str[i];
-		if (str[i] == '\n')
-			nl = 1;
-		str[i++] = 0;
-	}
-	return (nl);
-}
-
-char	*ft_gnl(int fd)
-{
-	static char	buffer[BUFFER_SIZE + 1];
-	char		*line;
-	char		*temp;
-
-	if (read(fd, 0, 0) < 0 || BUFFER_SIZE < 1)
-	{
-		if (fd >= 0)
-			ft_bzero(&buffer[fd], BUFFER_SIZE);
-		return (NULL);
-	}
-	line = NULL;
-	while (read(fd, &buffer[fd], BUFFER_SIZE > 0))
-	{
-		temp = line;
-		line = ft_nl_strjoin(temp, &buffer[fd]);
-		free(temp);
-		if (ft_reset_line(&buffer[fd]))
-			break ;
-	}
-	return (line);
 }
 
 long	ft_atol(const char *str)

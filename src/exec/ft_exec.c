@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:49 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 12:50:09 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:32:23 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_child_continue(t_ms *ms, t_cmd *node)
 	else if (node->cmds && node->cmds[0])
 	{
 		ft_close_pipes(ms);
-		ft_execute_command(ms, node->cmds);
+		ft_execute_cmd(ms, node->cmds);
 	}
 	ft_cleanup_and_exit(ms, 0);
 }
@@ -39,13 +39,13 @@ static void	ft_child_process(t_ms *ms, t_cmd *node)
 		exit(0);
 	}
 	if (node->cmds && ms->in_fd != STDIN_FILENO
-		&& ft_check_command(ms, node->cmds))
+		&& ft_check_cmd(ms, node->cmds))
 	{
 		dup2(ms->in_fd, STDIN_FILENO);
 		ft_close(ms->in_fd);
 	}
 	if (node->cmds && ms->out_fd != STDOUT_FILENO
-		&& ft_check_command(ms, node->cmds))
+		&& ft_check_cmd(ms, node->cmds))
 	{
 		dup2(ms->out_fd, STDOUT_FILENO);
 		ft_close(ms->out_fd);
@@ -101,7 +101,7 @@ void	ft_executor(t_ms *ms, t_cmd *parser, int i)
 		ms->out_fd = STDOUT_FILENO;
 	else
 		ms->out_fd = ms->channels[i][1];
-	ft_expand_commands(&node->cmds, ms);
+	ft_expand_cmds(&node->cmds, ms);
 	signal(SIGINT, SIG_IGN);
 	ms->process = fork();
 	if (ms->process == 0)

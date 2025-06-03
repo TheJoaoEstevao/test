@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sig_one.c                                       :+:      :+:    :+:   */
+/*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:31 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 16:18:35 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:28:58 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_handle_hdoc_signal(int signo)
 	if (signo == SIGINT)
 	{
 		g_signo = 130;
-		fd = open(TEMP_NFS, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		fd = open(TEMP, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		dup2(fd, 0);
 		ft_close(fd);
 		ioctl(0, TIOCSTI, "\n");

@@ -6,18 +6,18 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:07 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 17:19:08 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:20:31 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
 
-t_bool	ft_check_operator_sequence(t_token *lexer)
+t_bool	ft_check_operator_sequence(t_token *token)
 {
 	t_token	*curr;
 	t_token	*previous;
 
-	curr = lexer;
+	curr = token;
 	while (curr)
 	{
 		previous = curr;
@@ -47,12 +47,12 @@ void	ft_error_msg(char *s1, char *s2, char *s3, char *s4)
 	ft_putstr_fd("\n", 2);
 }
 
-t_bool	ft_check_empty_redirect(t_token *lexer)
+t_bool	ft_check_empty_redirect(t_token *token)
 {
 	t_token	*curr;
 	t_token	*previous;
 
-	curr = lexer;
+	curr = token;
 	while (curr)
 	{
 		previous = curr;

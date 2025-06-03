@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_gen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:44 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:45 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:43:18 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,26 +112,4 @@ char	**ft_split(char const *s, char c)
 		}
 	}
 	return (strs);
-}
-
-char	*ft_strstr(char *haystack, char *needle)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	if (needle[0] == '\0')
-		return (haystack);
-	while (haystack[i] != '\0')
-	{
-		j = 0;
-		while (haystack[i + j] == needle[j] && haystack[i + j] != '\0')
-		{
-			if (needle[j + 1] == '\0')
-				return (&haystack[i]);
-			j++;
-		}
-		i++;
-	}
-	return (0);
 }

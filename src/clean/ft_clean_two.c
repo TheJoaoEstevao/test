@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clean_two.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:04 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:05 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:35:14 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	ft_free_str_array(char **matrix)
 	free(matrix);
 }
 
-void	ft_free_pipe_array(t_ms *sh)
+void	ft_free_pipe_array(t_ms *ms)
 {
 	int	i;
 
 	i = -1;
-	if (sh == NULL || sh->channels == NULL)
+	if (ms == NULL || ms->channels == NULL)
 		return ;
-	while (++i < sh->exec_num)
-		free(sh->channels[i]);
-	free(sh->channels);
+	while (++i < ms->exec_num)
+		free(ms->channels[i]);
+	free(ms->channels);
 }

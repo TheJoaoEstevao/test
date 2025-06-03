@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:07 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 12:52:37 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:49:33 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_remove_null_entries(char **cmds, int count)
 	return (null_count);
 }
 
-int	ft_expand_command_str(char *value, int start, int end, char **line)
+int	ft_expand_cmd_str(char *value, int start, int end, char **line)
 {
 	char	*prefix;
 	char	*suffix;
@@ -69,18 +69,18 @@ void	ft_handle_valid_env(int pos, t_ms *ms, char *env_val, char **line)
 	tmp = ft_substr(*line, pos + ms->b_l,
 			ft_strlen(*line) - pos + ms->b_l + 1);
 	if (ms->track->d_quote)
-		ft_expand_command_str(env_val, pos, pos + ms->b_l, line);
+		ft_expand_cmd_str(env_val, pos, pos + ms->b_l, line);
 	else if (ft_count_words(env_val, ' ') > 1 && !pos && !tmp[0]
 		&& ft_strlen_matrix(*ms->matrix) == 1)
 	{
 		trimmed = ft_strdup(env_val);
-		ft_update_command_array(ms, ft_trim_spaces(ms, trimmed), line);
+		ft_update_cmd_array(ms, ft_trim_spaces(ms, trimmed), line);
 		free(trimmed);
 	}
 	else
 	{
 		trimmed = ft_strdup(env_val);
-		ft_expand_command_str(ft_trim_spaces(ms, trimmed), pos,
+		ft_expand_cmd_str(ft_trim_spaces(ms, trimmed), pos,
 			pos + ms->b_l, line);
 		free(trimmed);
 	}
@@ -88,9 +88,9 @@ void	ft_handle_valid_env(int pos, t_ms *ms, char *env_val, char **line)
 	free(env_val);
 }
 
-int	ft_expand_and_free(char *key, int start, int end, char **line)
+int	ft_expand_and_free(char *name, int start, int end, char **line)
 {
-	ft_expand_command_str(key, start, end, line);
-	free(key);
+	ft_expand_cmd_str(name, start, end, line);
+	free(name);
 	return (1);
 }

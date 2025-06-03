@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:18 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 17:41:52 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:28:54 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	ft_handle_hdoc_child(t_token *heredoc_node, t_ms *ms)
 	g_signo = 0;
 	ft_heredoc(heredoc_node, ms);
 	ft_close(0);
-	unlink(TEMP_NFS);
+	unlink(TEMP);
 	ft_free_token_list(heredoc_node);
 	ms->doc_list = NULL;
 	rl_clear_history();

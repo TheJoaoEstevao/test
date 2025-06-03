@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:51 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 17:28:40 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:32:35 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*ft_search_executable(char *cmd, char *path_env)
 	return (NULL);
 }
 
-char	*ft_find_command_path(char *cmd, t_ms *ms)
+char	*ft_find_cmd_path(char *cmd, t_ms *ms)
 {
 	char	*path_env;
 	char	*exec_path;

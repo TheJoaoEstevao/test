@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clean_one.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:49:59 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:00 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:49:09 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	ft_free_token_node(t_token *node)
 	}
 }
 
-static void	ft_remove_token_pair(t_token **lexer, t_token *current, \
-t_token *prev)
+static void	ft_remove_token_pair(t_token **token, t_token *current,
+	t_token *prev)
 {
 	t_token	*temp;
 
@@ -34,15 +34,15 @@ t_token *prev)
 	{
 		if (!current->prev)
 		{
-			*lexer = current->next->next;
-			if (*lexer)
-				(*lexer)->prev = NULL;
+			*token = current->next->next;
+			if (*token)
+				(*token)->prev = NULL;
 		}
 		else
 		{
 			prev = current->prev;
 			prev->next = current->next->next;
-			*lexer = current->next->next;
+			*token = current->next->next;
 		}
 	}
 	temp = current->next;
@@ -50,20 +50,20 @@ t_token *prev)
 	ft_free_token_node(temp);
 }
 
-void	ft_delete_token_pair(t_token **lexer, int key)
+void	ft_delete_token_pair(t_token **token, int name)
 {
 	t_token	*current;
 	t_token	*prev;
 
-	current = *lexer;
+	current = *token;
 	prev = NULL;
-	if (!(*lexer))
+	if (!(*token))
 		return ;
 	while (current && current->next)
 	{
-		if (current->index == key)
+		if (current->index == name)
 		{
-			ft_remove_token_pair(lexer, current, prev);
+			ft_remove_token_pair(token, current, prev);
 			return ;
 		}
 		prev = current;

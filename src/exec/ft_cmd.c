@@ -6,13 +6,13 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:46 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 17:29:41 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:15:39 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
 
-t_bool	ft_check_command(t_ms *ms, char **cmds)
+t_bool	ft_check_cmd(t_ms *ms, char **cmds)
 {
 	char	*cmd_path;
 
@@ -26,7 +26,7 @@ t_bool	ft_check_command(t_ms *ms, char **cmds)
 			ft_cmd_error_exit(ms, cmds[0], 21, cmd_path);
 	}
 	else if (cmds[0][0])
-		cmd_path = ft_find_command_path(cmds[0], ms);
+		cmd_path = ft_find_cmd_path(cmds[0], ms);
 	if (!cmd_path)
 		return (FALSE);
 	else
@@ -61,7 +61,7 @@ static void	ft_handle_path_error(t_ms *ms, char **cmds, char *cmd_path)
 	exit(1);
 }
 
-void	ft_execute_command(t_ms *ms, char **cmds)
+void	ft_execute_cmd(t_ms *ms, char **cmds)
 {
 	char	*cmd_path;
 
@@ -73,7 +73,7 @@ void	ft_execute_command(t_ms *ms, char **cmds)
 			ft_cmd_error_exit(ms, cmds[0], 21, cmd_path);
 	}
 	else if (cmds[0][0])
-		cmd_path = ft_find_command_path(cmds[0], ms);
+		cmd_path = ft_find_cmd_path(cmds[0], ms);
 	ft_handle_path_error(ms, cmds, cmd_path);
 }
 
@@ -83,7 +83,7 @@ static void	ft_process_redirection(t_ms *ms, t_cmd *node, t_token *temp)
 
 	if (ft_check_input_redirection(ms, temp))
 	{
-		if (node->cmds && ft_check_command(ms, node->cmds))
+		if (node->cmds && ft_check_cmd(ms, node->cmds))
 			dup2(ms->in_fd, STDIN_FILENO);
 		ft_close(ms->in_fd);
 	}
@@ -93,7 +93,7 @@ static void	ft_process_redirection(t_ms *ms, t_cmd *node, t_token *temp)
 		if (temp->kind == TOK_APPEND)
 			flags = O_APPEND;
 		ms->out_fd = open(temp->content, O_WRONLY | O_CREAT | flags, 0644);
-		if (node->cmds && ft_check_command(ms, node->cmds))
+		if (node->cmds && ft_check_cmd(ms, node->cmds))
 			dup2(ms->out_fd, STDOUT_FILENO);
 		ft_close(ms->out_fd);
 	}

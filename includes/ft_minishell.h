@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:49:47 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 17:47:01 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:15:14 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ typedef struct s_ms
 # define DELIMS        "\t\n\v\f\r "
 # define SYNTAX_CHARS  "|></ \t\n\v\f\r"
 # define OP_CHARS      "<>|"
-# define MS_PREFIX     "[minishell]"
 # define HDOC_EOF_WARN "[minishell]: warning: here-doc delimited by \
 end-of-file (wanted"
 # define ERROR_TOKEN   "[minishell]: syntax error near unexpected token\n"
@@ -114,7 +113,7 @@ end-of-file (wanted"
 # define INV_IDENT     "': not a valid identifier"
 # define MAX_LLONG_STR	"9223372036854775807"
 # define MIN_LLONG_STR	"9223372036854775808"
-# define TEMP_NFS       ".nfs01sdfdfsdf3f1dca2zx"
+# define TEMP       ".01f3f1dca2zx"
 # define BUFFER_SIZE    1024
 # define CMD_TYPE       2
 
@@ -128,7 +127,6 @@ void		*ft_calloc(size_t nmemb, size_t size);
 void		*ft_memmove(void *dest, const void *src, size_t n);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_putchar_fd(char c, int fd);
-void		ft_putnbr_fd(int n, int fd);
 size_t		ft_strlen_matrix(char **s);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
@@ -139,7 +137,6 @@ int			ft_is_str_equal(const char *s1, const char *s2);
 char		*ft_nl_strjoin(char *s1, char *s2);
 int			ft_count_words(char const *s, char c);
 void		ft_process_redirect_heredoc(t_ms *ms, t_token **in_redirs);
-
 char		*ft_itoa(int n);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		**ft_split(char const *s, char c);
@@ -166,31 +163,30 @@ void		ft_convt_list_to_array(t_token *start, t_token *end, char ***cmd);
 t_cmd		*ft_build_cmd_tree(t_token **start, t_ms *ms);
 void		ft_rm_quotes_hdoc(char *str);
 void		ft_check_hdoc(t_token *lexer, t_ms *ms);
-char		*ft_strstr(char *haystack, char *needle);
 int			ft_remove_null_entries(char **cmds, int count);
-int			ft_expand_command_str(char *value, int start, int end, char **line);
+int			ft_expand_cmd_str(char *value, int start, int end, char **line);
 void		ft_handle_valid_env(int pos, t_ms *ms, char *env_val, char **line);
 int			ft_expand_and_free(char *name, int start, int end, char **line);
 int			ft_expand_dollar(t_ms *ms, int point, char *tmp, char **line);
 int			ft_check_quote_pairs(const char *str, t_ms *ms);
 void		ft_expand_env_vars(t_ms *ms, char *tmp, char **line);
-void		ft_update_command_array(t_ms *ms, char *value, char **line);
+void		ft_update_cmd_array(t_ms *ms, char *value, char **line);
 void		ft_space_pipes(t_ms *ms, char *tmp);
-void		ft_expand_commands(char ***cmds, t_ms *ms);
+void		ft_expand_cmds(char ***cmds, t_ms *ms);
 char		*ft_trim_spaces(t_ms *ms, char *str);
 void		ft_handle_child_signal(int signo);
 void		ft_setup_signals(void);
 void		ft_update_exit_status(t_ms *ms, int status);
 void		ft_handle_hdoc_signal(int signo);
 char		*ft_strtok(char *str, char *delimiter);
-t_bool		ft_check_command(t_ms *ms, char **cmds);
-void		ft_execute_command(t_ms *ms, char **cmds);
+t_bool		ft_check_cmd(t_ms *ms, char **cmds);
+void		ft_execute_cmd(t_ms *ms, char **cmds);
 void		ft_cmd_error_exit(t_ms *ms, const char *cmd,
 				int err_no, char *path);
 void		ft_create_pipes(t_ms *ms);
 void		ft_close_pipes(t_ms *ms);
 t_bool		ft_is_absolute_path(char *path);
-char		*ft_find_command_path(char *cmd, t_ms *ms);
+char		*ft_find_cmd_path(char *cmd, t_ms *ms);
 void		ft_handle_null_path(t_ms *ms, char **cmds);
 void		ft_executor(t_ms *ms, t_cmd *parser, int i);
 int			ft_cd(t_ms *ms, char **cmds);
@@ -211,7 +207,6 @@ void		ft_free_str_array(char **matrix);
 void		ft_free_pipe_array(t_ms *ms);
 void		ft_cleanup_heredoc(t_ms *ms);
 void		ft_free_cmd_tree(t_cmd *home);
-
 void		ft_cleanup_and_exit(t_ms *ms, int i);
 void		ft_handle_heredoc_eof(t_ms *ms, int fd);
 t_bool		ft_check_operator_sequence(t_token *lexer);
@@ -219,7 +214,6 @@ int			ft_validate_syntax(t_token *lexer);
 void		ft_error_msg(char *s1, char *s2, char *s3, char *s4);
 t_bool		ft_check_empty_redirect(t_token *lexer);
 void		ft_syntax_error(char *token, t_ms *ms);
-void		ft_print_syntax_error(char *token);
 t_bool		ft_process_tokens(t_ms *ms);
 t_bool		ft_validate_final_syntax(t_token *curr, t_ms *ms);
 t_bool		ft_check_token_sequence(t_token *curr, t_ms *ms);

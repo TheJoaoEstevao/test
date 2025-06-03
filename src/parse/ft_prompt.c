@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:28 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 17:47:05 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:38:52 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,16 @@ void	ft_check_empty_line(t_ms *ms)
 	free(trimmed);
 }
 
-static char	*ft_get_current_dir(t_ms *ms)
-{
-	return (ft_safe_getcwd(ms, 1));
-}
-
 char	*ft_get_prompt(t_ms *ms)
 {
 	char	*pwd;
 	char	*prompt;
 	char	*temp;
 
-	pwd = ft_get_current_dir(ms);
+	pwd = ft_safe_getcwd(ms, 1);
 	if (!pwd)
-		return (ft_strdup(MS_PREFIX"$ "));
-	prompt = ft_strjoin(MS_PREFIX":", pwd);
+		return (ft_strdup("[minishell]$ "));
+	prompt = ft_strjoin("[minishell]:", pwd);
 	temp = ft_strjoin(prompt, "$ ");
 	free(prompt);
 	prompt = temp;
