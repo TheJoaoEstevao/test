@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:25 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 17:16:30 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:32:40 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_route(t_ms *ms, char **cmds)
 	if (ft_is_str_equal(cmds[0], "export"))
 		return (ft_export(ms, cmds));
 	if (ft_is_str_equal(cmds[0], "pwd"))
-		return (ft_pwd(ms));
+		return (ft_pwd());
 	if (ft_is_str_equal(cmds[0], "unset"))
 		return (ft_unset(ms, cmds));
 	return (0);

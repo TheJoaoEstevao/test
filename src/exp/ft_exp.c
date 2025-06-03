@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:05 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 10:33:43 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:42:11 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,14 @@ void	ft_expand_cmds(char ***cmds, t_ms *ms)
 	}
 }
 
-char	*ft_trim_spaces(t_ms *ms, char *str)
+char	*ft_trim_spaces(char *str)
 {
 	int	i;
-	int	ou_pos;
+	int	j;
 	int	space_flag;
 
-	(void)ms;
 	i = 0;
-	ou_pos = 0;
+	j = 0;
 	space_flag = 1;
 	while (ft_isspace(str[i]))
 		i++;
@@ -110,15 +109,16 @@ char	*ft_trim_spaces(t_ms *ms, char *str)
 	{
 		if (ft_isspace(str[i]) && space_flag)
 		{
-			str[ou_pos++] = ' ';
+			str[j++] = ' ';
 			space_flag = 0;
 		}
 		else if (!ft_isspace(str[i]))
 		{
-			str[ou_pos++] = str[i];
+			str[j++] = str[i];
 			space_flag = 1;
 		}
 		i++;
 	}
-	return (str[ou_pos - (ou_pos > 0 && ft_isspace(str[ou_pos - 1]))] = 0, str);
+	str[j - (j > 0 && ft_isspace(str[j - 1]))] = 0;
+	return (str);
 }

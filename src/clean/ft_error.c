@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:07 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 10:20:31 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:19:06 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_error_msg(char *s1, char *s2, char *s3, char *s4)
 		ft_putstr_fd(s3, 2);
 	if (s4)
 		ft_putstr_fd(s4, 2);
-	ft_putstr_fd("\n", 2);
+	ft_putchar_fd('\n', 2);
 }
 
 t_bool	ft_check_empty_redirect(t_token *token)

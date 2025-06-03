@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:49:47 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 11:15:14 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:14:33 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ end-of-file (wanted"
 # define INV_IDENT     "': not a valid identifier"
 # define MAX_LLONG_STR	"9223372036854775807"
 # define MIN_LLONG_STR	"9223372036854775808"
-# define TEMP       ".01f3f1dca2zx"
+# define TEMP       	".01f3f1dca2zx"
 # define BUFFER_SIZE    1024
 # define CMD_TYPE       2
 
@@ -173,7 +173,7 @@ void		ft_expand_env_vars(t_ms *ms, char *tmp, char **line);
 void		ft_update_cmd_array(t_ms *ms, char *value, char **line);
 void		ft_space_pipes(t_ms *ms, char *tmp);
 void		ft_expand_cmds(char ***cmds, t_ms *ms);
-char		*ft_trim_spaces(t_ms *ms, char *str);
+char		*ft_trim_spaces(char *str);
 void		ft_handle_child_signal(int signo);
 void		ft_setup_signals(void);
 void		ft_update_exit_status(t_ms *ms, int status);
@@ -195,7 +195,7 @@ int			ft_env(t_ms *ms, char **cmds);
 void		ft_exit(t_ms *ms, char **cmds);
 int			ft_export(t_ms *ms, char **cmds);
 void		ft_export_print(t_ms *ms);
-int			ft_pwd(t_ms *ms);
+int			ft_pwd(void);
 int			ft_unset(t_ms *ms, char **cmds);
 t_bool		ft_is_parent(char **cmd);
 t_bool		ft_is_child(char **cmd);

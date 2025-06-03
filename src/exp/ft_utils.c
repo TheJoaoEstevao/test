@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:07 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 10:49:33 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:31:34 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,16 @@ void	ft_handle_valid_env(int pos, t_ms *ms, char *env_val, char **line)
 	if (ms->track->d_quote)
 		ft_expand_cmd_str(env_val, pos, pos + ms->b_l, line);
 	else if (ft_count_words(env_val, ' ') > 1 && !pos && !tmp[0]
-		&& ft_strlen_matrix(*ms->matrix) == 1)
+		&& !ft_strlen_matrix(*ms->matrix))
 	{
 		trimmed = ft_strdup(env_val);
-		ft_update_cmd_array(ms, ft_trim_spaces(ms, trimmed), line);
+		ft_update_cmd_array(ms, ft_trim_spaces(trimmed), line);
 		free(trimmed);
 	}
 	else
 	{
 		trimmed = ft_strdup(env_val);
-		ft_expand_cmd_str(ft_trim_spaces(ms, trimmed), pos,
+		ft_expand_cmd_str(ft_trim_spaces(trimmed), pos,
 			pos + ms->b_l, line);
 		free(trimmed);
 	}

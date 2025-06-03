@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:22 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 10:49:17 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:31:17 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,13 @@ static int	ft_validate_name_chars(char *name, char *equals_pos)
 	return (0);
 }
 
-int	ft_validate_name(t_ms *ms, char *str)
+int	ft_validate_name(char *str)
 {
 	int		equals_pos;
 	char	*name;
 
 	if (!str || ft_strlen(str) == 0)
 		return (1);
-	(void)ms;
 	if (ft_is_present(str, '='))
 	{
 		equals_pos = 0;
@@ -88,7 +87,7 @@ int	ft_process_export(t_ms *ms, char *cmd)
 	char	*name;
 	char	*value;
 
-	if (ft_validate_name(ms, cmd) == 0)
+	if (ft_validate_name(cmd) == 0)
 	{
 		name = ft_extract_env_name(cmd);
 		value = ft_extract_env_value(cmd);
@@ -108,14 +107,14 @@ int	ft_export(t_ms *ms, char **cmds)
 
 	index = 1;
 	has_error = 0;
-	if (ft_strlen_matrix(cmds) == 1)
+	if (!ft_strlen_matrix(cmds))
 	{
 		ft_export_print(ms);
 		return (0);
 	}
 	while (cmds[index])
 	{
-		if (ft_validate_name(ms, cmds[index]))
+		if (ft_validate_name(cmds[index]))
 		{
 			ft_error_msg("export: '",
 				cmds[index], "': not a valid identifier", NULL);

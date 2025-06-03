@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:31 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:32 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:31:18 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
 
-int	ft_pwd(t_ms *ms)
+int	ft_pwd(void)
 {
 	char	*current_path;
 
-	(void)ms;
 	current_path = getcwd(NULL, 0);
 	if (!current_path)
 	{
