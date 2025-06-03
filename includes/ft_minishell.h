@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:49:47 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 13:50:04 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:40:52 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef enum s_enums
 typedef struct s_token
 {
 	char			*content;
-	t_enums			kind;
-	int				index;
+	t_enums			t_type;
+	int				i;
 	char			*limit;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -53,9 +53,8 @@ typedef struct s_token
 
 typedef struct s_track
 {
-	int	cursor;
-	int	phrase;
-	int	amount;
+	int	i;
+	int	arg_i;
 	int	d_quote;
 	int	s_quote;
 }	t_track;
@@ -83,7 +82,7 @@ typedef struct s_ms
 	char			*display;
 	char			*home;
 	char			*cache;
-	char			**context;
+	char			**current;
 	char			***matrix;
 	int				code;
 	int				doc_num;
@@ -104,7 +103,7 @@ typedef struct s_ms
 }	t_ms;
 
 # define DELIMS        "\t\n\v\f\r "
-# define SYNTAX_CHARS  "|></ \t\n\v\f\r"
+# define SYNTAX_CHARS  "|></´` \t\n\v\f\r"
 # define OP_CHARS      "<>|"
 # define HDOC_EOF_WARN "[minishell]: warning: here-doc delimited by \
 end-of-file (wanted"
@@ -117,7 +116,7 @@ end-of-file (wanted"
 # define BUFFER_SIZE    1024
 # define CMD_TYPE       2
 
-void		ft_expand_hdoc_vars(t_ms *ms, char *tmp, char **line);
+void		ft_expand_hdoc_vars(t_ms *ms, char *tmp, char **arg_i);
 int			ft_check_input_redirection(t_ms *ms, t_token *temp);
 char		*ft_strdup(const char *s);
 char		*ft_strjoin(char const *s1, char const *s2);
@@ -150,7 +149,7 @@ char		*ft_safe_getcwd(t_ms *ms, int error_code);
 void		ft_handle_exit(t_ms *ms);
 void		ft_check_empty_line(t_ms *ms);
 char		*ft_get_prompt(t_ms *ms);
-t_token		*ft_create_token_node(char *content, int index, t_ms *ms);
+t_token		*ft_create_token_node(char *content, int i, t_ms *ms);
 void		ft_add_token_back(t_token **lexer, t_token *new);
 t_token		*ft_tokenize_input(char *ui, t_ms *ms);
 t_bool		ft_is_present(const char *str, char c);
@@ -162,13 +161,13 @@ t_cmd		*ft_build_cmd_tree(t_token **start, t_ms *ms);
 void		ft_rm_quotes_hdoc(char *str);
 void		ft_check_hdoc(t_token *lexer, t_ms *ms);
 int			ft_remove_null_entries(char **cmds, int count);
-int			ft_expand_cmd_str(char *value, int start, int end, char **line);
-void		ft_handle_valid_env(int pos, t_ms *ms, char *env_val, char **line);
-int			ft_expand_and_free(char *name, int start, int end, char **line);
-int			ft_expand_dollar(t_ms *ms, int point, char *tmp, char **line);
+int			ft_expand_cmd_str(char *value, int start, int end, char **arg_i);
+void		ft_handle_valid_env(int pos, t_ms *ms, char *env_val, char **arg_i);
+int			ft_expand_and_free(char *name, int start, int end, char **arg_i);
+int			ft_expand_dollar(t_ms *ms, int point, char *tmp, char **arg_i);
 int			ft_check_quote_pairs(const char *str, t_ms *ms);
-void		ft_expand_env_vars(t_ms *ms, char *tmp, char **line);
-void		ft_update_cmd_array(t_ms *ms, char *value, char **line);
+void		ft_expand_env_vars(t_ms *ms, char *tmp, char **arg_i);
+void		ft_update_cmd_array(t_ms *ms, char *value, char **arg_i);
 void		ft_space_pipes(t_ms *ms, char *tmp);
 void		ft_expand_cmds(char ***cmds, t_ms *ms);
 char		*ft_trim_spaces(char *str);

@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:21 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 10:39:43 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:23:05 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_cmd	*ft_create_pipe_node(void)
 
 static t_token	*ft_find_pipe_token(t_token *start)
 {
-	while (start && start->kind != TOK_PIPE)
+	while (start && start->t_type != TOK_PIPE)
 		start = start->next;
 	return (start);
 }

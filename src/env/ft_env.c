@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:37 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 16:32:06 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:41:31 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ void	ft_init_env_list(t_ms *ms)
 	t_var	*env_node;
 
 	i = 0;
-	while (ms->context[i])
+	while (ms->current[i])
 	{
-		name = ft_extract_env_name(ms->context[i]);
-		value = ft_extract_env_value(ms->context[i]);
+		name = ft_extract_env_name(ms->current[i]);
+		value = ft_extract_env_value(ms->current[i]);
 		if (name && value)
 		{
 			env_node = ft_create_env_node(name, value, 1);

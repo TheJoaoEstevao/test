@@ -6,13 +6,13 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:10 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 13:50:34 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:38:55 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
 
-void	ft_expand_hdoc_vars(t_ms *sh, char *tmp, char **line)
+void	ft_expand_hdoc_vars(t_ms *sh, char *tmp, char **arg_i)
 {
 	int		dquote;
 	int		squote;
@@ -29,9 +29,9 @@ void	ft_expand_hdoc_vars(t_ms *sh, char *tmp, char **line)
 			&& !((dquote || squote) && (*(tmp + 1) == '"'
 					|| *(tmp + 1) == '\'')))
 		{
-			if (ft_expand_dollar(sh, tmp - *line, tmp, line))
+			if (ft_expand_dollar(sh, tmp - *arg_i, tmp, arg_i))
 			{
-				tmp = *line - 1;
+				tmp = *arg_i - 1;
 				dquote = 0;
 				squote = 0;
 			}
@@ -45,7 +45,7 @@ t_token	*ft_heredoc_new(char *limiter)
 
 	hdoc_node = ft_calloc(1, sizeof(t_token));
 	hdoc_node->limit = limiter;
-	hdoc_node->kind = TOK_HEREDOC;
+	hdoc_node->t_type = TOK_HEREDOC;
 	return (hdoc_node);
 }
 
@@ -81,7 +81,7 @@ static void	ft_init_and_up_cache(t_token *current, t_ms *ms)
 {
 	char	*old_cache;
 
-	if (current->kind == TOK_HEREDOC)
+	if (current->t_type == TOK_HEREDOC)
 	{
 		ms->doc_state = 0;
 		old_cache = ms->cache;
@@ -104,7 +104,7 @@ void	ft_check_hdoc(t_token *lexer, t_ms *ms)
 	ms->cache[0] = '.';
 	while (current && current->next)
 	{
-		if (current->kind == TOK_HEREDOC)
+		if (current->t_type == TOK_HEREDOC)
 		{
 			ft_init_and_up_cache(current, ms);
 			ft_rm_quotes_hdoc(current->next->content);

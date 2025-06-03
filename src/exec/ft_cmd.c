@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:46 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 12:49:13 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:41:48 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_handle_path_error(t_ms *ms, char **cmds, char *cmd_path)
 		}
 		ft_handle_null_path(ms, cmds);
 	}
-	execve(cmd_path, cmds, ms->context);
+	execve(cmd_path, cmds, ms->current);
 	if (errno == ENOEXEC)
 	{
 		ft_putstr_fd("[minishell]: ", 2);
@@ -87,10 +87,10 @@ static void	ft_process_redirection(t_ms *ms, t_cmd *node, t_token *temp)
 			dup2(ms->in_fd, STDIN_FILENO);
 		ft_close(ms->in_fd);
 	}
-	else if (temp->kind == TOK_RED_OUT || temp->kind == TOK_APPEND)
+	else if (temp->t_type == TOK_RED_OUT || temp->t_type == TOK_APPEND)
 	{
 		flags = O_TRUNC;
-		if (temp->kind == TOK_APPEND)
+		if (temp->t_type == TOK_APPEND)
 			flags = O_APPEND;
 		ms->out_fd = open(temp->content, O_WRONLY | O_CREAT | flags, 0644);
 		if (node->cmds && ft_check_cmd(ms, node->cmds))
@@ -107,13 +107,13 @@ void	ft_handle_redirections(t_ms *ms, t_cmd *node)
 	while (temp)
 	{
 		ft_rm_quotes_hdoc(temp->content);
-		if (temp->kind == TOK_RED_IN && access(temp->content, F_OK))
+		if (temp->t_type == TOK_RED_IN && access(temp->content, F_OK))
 		{
 			ft_putstr_fd("[minishell]: ", 2);
 			perror(temp->content);
 			ft_cleanup_and_exit(ms, 1);
 		}
-		if (temp->kind != TOK_RED_IN && !access(temp->content, F_OK)
+		if (temp->t_type != TOK_RED_IN && !access(temp->content, F_OK)
 			&& access(temp->content, W_OK))
 		{
 			ft_putstr_fd("[minishell]: ", 2);

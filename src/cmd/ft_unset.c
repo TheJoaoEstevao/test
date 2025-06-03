@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:33 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 12:51:59 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:20:22 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ static void	ft_delete_env_var(t_ms *ms, char *name)
 
 int	ft_unset(t_ms *ms, char **cmds)
 {
-	int	index;
+	int	i;
 
-	index = 1;
+	i = 1;
 	if (ft_strlen_matrix(cmds) == 1)
 		return (0);
 	else
 	{
-		while (cmds[index])
-			ft_delete_env_var(ms, cmds[index++]);
+		while (cmds[i])
+			ft_delete_env_var(ms, cmds[i++]);
 		ft_update_env_array(ms);
 	}
 	return (0);

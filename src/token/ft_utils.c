@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:39 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 16:33:33 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:34:52 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,21 @@ static void	ft_advance_word(char *str, int *j)
 
 void	ft_set_word_end(char *ui, t_ms *ms)
 {
-	ms->track->phrase = ms->track->cursor;
-	if (ui[ms->track->phrase] == '\"' || ui[ms->track->phrase] == '\'')
+	ms->track->arg_i = ms->track->i;
+	if (ui[ms->track->arg_i] == '\"' || ui[ms->track->arg_i] == '\'')
 	{
-		ft_advance_quote(ui, &ms->track->phrase, ui[ms->track->phrase]);
-		while (!ft_isspace(ui[ms->track->phrase])
-			&& ui[ms->track->phrase] != '\0')
+		ft_advance_quote(ui, &ms->track->arg_i, ui[ms->track->arg_i]);
+		while (!ft_isspace(ui[ms->track->arg_i])
+			&& ui[ms->track->arg_i] != '\0')
 		{
-			if (ui[ms->track->phrase] == '\"'
-				|| ui[ms->track->phrase] == '\'')
-				ft_advance_quote(ui, &ms->track->phrase,
-					ui[ms->track->phrase]);
+			if (ui[ms->track->arg_i] == '\"'
+				|| ui[ms->track->arg_i] == '\'')
+				ft_advance_quote(ui, &ms->track->arg_i,
+					ui[ms->track->arg_i]);
 			else
-				ft_advance_word(ui, &ms->track->phrase);
+				ft_advance_word(ui, &ms->track->arg_i);
 		}
 	}
 	else
-		ft_advance_word(ui, &ms->track->phrase);
+		ft_advance_word(ui, &ms->track->arg_i);
 }

@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:36 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 13:13:14 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:34:43 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_token	*ft_create_token_node(char *word, int i, t_ms *ms)
 	if (!new)
 		return (NULL);
 	new->content = word;
-	new->kind = ft_get_token_type(word, ms);
-	new->index = i;
+	new->t_type = ft_get_token_type(word, ms);
+	new->i = i;
 	return (new);
 }
 
@@ -49,18 +49,18 @@ t_token	*ft_tokenize_input(char *ui, t_ms *ms)
 	char	*word;
 
 	lexer = NULL;
-	while (ui[ms->track->cursor])
+	while (ui[ms->track->i])
 	{
-		if (ft_isspace(ui[ms->track->cursor]))
-			ms->track->cursor++;
+		if (ft_isspace(ui[ms->track->i]))
+			ms->track->i++;
 		else
 		{
 			ft_set_word_end(ui, ms);
-			word = ft_substr(ui, ms->track->cursor,
-					ms->track->phrase - ms->track->cursor);
+			word = ft_substr(ui, ms->track->i,
+					ms->track->arg_i - ms->track->i);
 			ft_add_token_back(&lexer, ft_create_token_node(word,
-					ms->track->cursor, ms));
-			ms->track->cursor = ms->track->phrase;
+					ms->track->i, ms));
+			ms->track->i = ms->track->arg_i;
 		}
 	}
 	return (lexer);

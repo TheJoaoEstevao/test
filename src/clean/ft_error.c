@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:07 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 11:19:06 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:22:27 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ t_bool	ft_check_operator_sequence(t_token *token)
 	{
 		previous = curr;
 		curr = curr->next;
-		if (curr && previous->kind && curr->kind)
+		if (curr && previous->t_type && curr->t_type)
 		{
-			if (previous->kind == TOK_PIPE && curr->kind != TOK_PIPE)
+			if (previous->t_type == TOK_PIPE && curr->t_type != TOK_PIPE)
 				continue ;
 			else
 				return (TRUE);
@@ -57,7 +57,7 @@ t_bool	ft_check_empty_redirect(t_token *token)
 	{
 		previous = curr;
 		curr = curr->next;
-		if (!curr && previous->kind)
+		if (!curr && previous->t_type)
 			return (TRUE);
 	}
 	return (FALSE);

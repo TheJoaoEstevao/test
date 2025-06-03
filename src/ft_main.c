@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:52:02 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 10:48:28 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:41:00 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	ft_init_shell(t_ms *ms, char **env)
 	char	*home;
 
 	ft_bzero(ms, sizeof(t_ms));
-	ms->context = ft_copy_env_array(env);
+	ms->current = ft_copy_env_array(env);
 	ft_init_env_list(ms);
 	home = ft_get_env_value(ms, "HOME");
 	ms->home = home;

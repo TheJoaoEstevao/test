@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:02 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 13:32:28 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:19:23 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	ft_cleanup_heredoc(t_ms *ms)
 {
 	char	*filename;
 	char	*temp;
-	int		index;
+	int		i;
 
-	index = 0;
+	i = 0;
 	filename = ft_calloc(2, sizeof(char));
 	filename[0] = '.';
 	temp = ft_strjoin(filename, "a");
 	free(filename);
 	filename = temp;
-	while (!access(filename, R_OK) && index++ < ms->doc_num)
+	while (!access(filename, R_OK) && i++ < ms->doc_num)
 	{
 		unlink(filename);
 		temp = ft_strjoin(filename, "a");

@@ -6,35 +6,35 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:18 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 13:38:57 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:39:10 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
 
-void	ft_process_hdoc_line(t_ms *sh, char **line)
+void	ft_process_hdoc_line(t_ms *sh, char **arg_i)
 {
-	sh->track->cursor = -1;
+	sh->track->i = -1;
 	if (sh->doc_state != 1)
 	{
-		while ((*line)[++sh->track->cursor])
+		while ((*arg_i)[++sh->track->i])
 		{
-			if ((*line)[sh->track->cursor] == '$')
+			if ((*arg_i)[sh->track->i] == '$')
 			{
-				ft_expand_hdoc_vars(sh, *line - 1, line);
+				ft_expand_hdoc_vars(sh, *arg_i - 1, arg_i);
 				break ;
 			}
 		}
 	}
-	ft_putendl_fd(*line, sh->track->phrase);
-	free(*line);
+	ft_putendl_fd(*arg_i, sh->track->arg_i);
+	free(*arg_i);
 }
 
-static int	ft_process_heredoc_line(t_token *heredoc, t_ms *ms, char *line)
+static int	ft_process_heredoc_line(t_token *heredoc, t_ms *ms, char *arg_i)
 {
 	if (g_signo == 130)
 		return (1);
-	if (!line)
+	if (!arg_i)
 	{
 		ft_putstr_fd(HDOC_EOF_WARN, 1);
 		ft_putstr_fd(" `", 1);
@@ -43,29 +43,29 @@ static int	ft_process_heredoc_line(t_token *heredoc, t_ms *ms, char *line)
 		return (1);
 	}
 	ms->line_count++;
-	if (ft_is_str_equal(line, heredoc->limit))
+	if (ft_is_str_equal(arg_i, heredoc->limit))
 	{
-		free(line);
+		free(arg_i);
 		return (1);
 	}
-	ft_process_hdoc_line(ms, &line);
+	ft_process_hdoc_line(ms, &arg_i);
 	return (0);
 }
 
 static void	ft_heredoc(t_token *heredoc, t_ms *ms)
 {
-	char	*line;
+	char	*arg_i;
 
-	line = NULL;
-	ms->track->phrase = open(ms->cache, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	arg_i = NULL;
+	ms->track->arg_i = open(ms->cache, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	signal(SIGINT, ft_handle_hdoc_signal);
 	while (g_signo != 130)
 	{
-		line = readline("> ");
-		if (ft_process_heredoc_line(heredoc, ms, line))
+		arg_i = readline("> ");
+		if (ft_process_heredoc_line(heredoc, ms, arg_i))
 			break ;
 	}
-	ft_close(ms->track->phrase);
+	ft_close(ms->track->arg_i);
 	if (g_signo != 130)
 		ms->in_fd = open(ms->cache, O_RDONLY);
 }

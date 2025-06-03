@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:22 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 13:16:37 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:20:15 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_update_env_var(t_ms *ms, char *name, char *value, int scope)
 
 static int	ft_validate_name_chars(char *name, char *equals_pos)
 {
-	int	index;
+	int	i;
 
 	if (!ft_isalpha(name[0]) && name[0] != '_')
 	{
@@ -44,16 +44,16 @@ static int	ft_validate_name_chars(char *name, char *equals_pos)
 			free(name);
 		return (1);
 	}
-	index = 1;
-	while (name[index])
+	i = 1;
+	while (name[i])
 	{
-		if (!ft_isalnum(name[index]) && name[index] != '_')
+		if (!ft_isalnum(name[i]) && name[i] != '_')
 		{
 			if (equals_pos)
 				free(name);
 			return (1);
 		}
-		index++;
+		i++;
 	}
 	if (equals_pos)
 		free(name);
@@ -101,27 +101,27 @@ int	ft_process_export(t_ms *ms, char *cmd)
 
 int	ft_export(t_ms *ms, char **cmds)
 {
-	int	index;
+	int	i;
 	int	has_error;
 
-	index = 1;
+	i = 1;
 	has_error = 0;
 	if (ft_strlen_matrix(cmds) == 1)
 	{
 		ft_export_print(ms);
 		return (0);
 	}
-	while (cmds[index])
+	while (cmds[i])
 	{
-		if (ft_validate_name(cmds[index]))
+		if (ft_validate_name(cmds[i]))
 		{
 			ft_error_msg("export: '",
-				cmds[index], "': not a valid identifier", NULL);
+				cmds[i], "': not a valid identifier", NULL);
 			has_error = 1;
 		}
 		else
-			ft_process_export(ms, cmds[index]);
-		index++;
+			ft_process_export(ms, cmds[i]);
+		i++;
 	}
 	ft_update_env_array(ms);
 	return (has_error);

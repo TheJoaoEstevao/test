@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:17 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 13:34:57 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:20:07 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ static t_bool	ft_check_longlong(char *str)
 
 static t_bool	ft_is_exit_num(char *cmd)
 {
-	int	index;
+	int	i;
 
-	index = 0;
-	if ((cmd[index] == '-' || cmd[index] == '+') && !cmd[index + 1])
+	i = 0;
+	if ((cmd[i] == '-' || cmd[i] == '+') && !cmd[i + 1])
 		return (FALSE);
-	if ((cmd[index] == '-' || cmd[index] == '+') && cmd[index + 1])
-		index++;
-	while (cmd[index])
+	if ((cmd[i] == '-' || cmd[i] == '+') && cmd[i + 1])
+		i++;
+	while (cmd[i])
 	{
-		if (!ft_isdigit(cmd[index]))
+		if (!ft_isdigit(cmd[i]))
 			return (FALSE);
-		index++;
+		i++;
 	}
 	return (TRUE);
 }

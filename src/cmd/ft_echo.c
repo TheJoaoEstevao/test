@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:13 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 12:45:15 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:19:32 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static t_bool	ft_check_newline_flag(char *cmd)
 {
-	int	index;
+	int	i;
 
-	index = 2;
+	i = 2;
 	if (!cmd)
 		return (FALSE);
 	if (!ft_strncmp(cmd, "-n", 2))
 	{
-		while (cmd[index])
+		while (cmd[i])
 		{
-			if (cmd[index++] != 'n')
+			if (cmd[i++] != 'n')
 				return (FALSE);
 		}
 		return (TRUE);
@@ -33,22 +33,22 @@ static t_bool	ft_check_newline_flag(char *cmd)
 
 int	ft_echo(char **cmds)
 {
-	int		index;
+	int		i;
 	t_bool	newline;
 
-	index = 1;
+	i = 1;
 	newline = TRUE;
-	while (cmds[index] && ft_check_newline_flag(cmds[index]))
+	while (cmds[i] && ft_check_newline_flag(cmds[i]))
 	{
 		newline = FALSE;
-		index++;
+		i++;
 	}
-	while (cmds[index])
+	while (cmds[i])
 	{
-		ft_putstr_fd(cmds[index], 1);
-		if (cmds[index + 1])
+		ft_putstr_fd(cmds[i], 1);
+		if (cmds[i + 1])
 			ft_putchar_fd(' ', 1);
-		index++;
+		i++;
 	}
 	if (newline)
 		ft_putchar_fd('\n', 1);

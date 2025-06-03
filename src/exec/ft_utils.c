@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:54 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 17:29:10 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:22:47 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	ft_close_pipes(t_ms *ms)
 
 int	ft_check_input_redirection(t_ms *ms, t_token *temp)
 {
-	if (temp->kind == TOK_RED_IN || temp->kind == TOK_HEREDOC)
+	if (temp->t_type == TOK_RED_IN || temp->t_type == TOK_HEREDOC)
 	{
-		if (temp->kind == TOK_HEREDOC)
+		if (temp->t_type == TOK_HEREDOC)
 			ms->in_fd = open(ms->cache, O_RDONLY);
 		else
 			ms->in_fd = open(temp->content, O_RDONLY);

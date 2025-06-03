@@ -6,13 +6,13 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:00 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 12:55:01 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:38:13 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
 
-int	ft_expand_dollar(t_ms *ms, int pos, char *input, char **line)
+int	ft_expand_dollar(t_ms *ms, int pos, char *input, char **arg_i)
 {
 	char	*name;
 	char	*env_val;
@@ -22,7 +22,7 @@ int	ft_expand_dollar(t_ms *ms, int pos, char *input, char **line)
 	if (!input[1])
 		return (0);
 	if (input[1] == '?')
-		return (ft_expand_and_free(ft_itoa(ms->code), pos, pos + 2, line));
+		return (ft_expand_and_free(ft_itoa(ms->code), pos, pos + 2, arg_i));
 	ms->len = 1;
 	while (ft_isalpha(input[ms->len]) || input[ms->len] == '_')
 		ms->len++;
@@ -32,9 +32,9 @@ int	ft_expand_dollar(t_ms *ms, int pos, char *input, char **line)
 	name = ft_substr(input, 1, ms->len - 1);
 	env_val = ft_get_env_value(ms, name);
 	if (env_val)
-		ft_handle_valid_env(pos, ms, env_val, line);
+		ft_handle_valid_env(pos, ms, env_val, arg_i);
 	else
-		ft_expand_cmd_str("", pos, pos + ms->len, line);
+		ft_expand_cmd_str("", pos, pos + ms->len, arg_i);
 	free(name);
 	return (1);
 }
@@ -61,13 +61,13 @@ int	ft_check_quote_pairs(const char *str, t_ms *ms)
 	}
 	if (quote_count % 2 != 0)
 	{
-		ft_putstr_fd("[minishell]: Open quote found.\n", 2);
+		ft_putstr_fd("[minishell]: Open quote is found.\n", 2);
 		ft_reset_shell_state(ms);
 	}
 	return (quote_count);
 }
 
-void	ft_expand_env_vars(t_ms *ms, char *input, char **line)
+void	ft_expand_env_vars(t_ms *ms, char *input, char **arg_i)
 {
 	ms->track->d_quote = 0;
 	ms->track->s_quote = 0;
@@ -82,31 +82,31 @@ void	ft_expand_env_vars(t_ms *ms, char *input, char **line)
 					|| ms->track->s_quote) && (*(input + 1) == '"'
 					|| *(input + 1) == '\'')))
 		{
-			if (ft_expand_dollar(ms, input - *line, input, line))
+			if (ft_expand_dollar(ms, input - *arg_i, input, arg_i))
 			{
-				if (ms->track->phrase == -1)
+				if (ms->track->arg_i == -1)
 					return ;
-				input = *line - 1;
+				input = *arg_i - 1;
 				ms->track->d_quote = 0;
 				ms->track->s_quote = 0;
 			}
 		}
 	}
-	ft_check_quote_pairs(*line, ms);
+	ft_check_quote_pairs(*arg_i, ms);
 }
 
-void	ft_update_cmd_array(t_ms *ms, char *value, char **line)
+void	ft_update_cmd_array(t_ms *ms, char *value, char **arg_i)
 {
 	int		idx;
 	char	**words;
 
 	idx = -1;
-	free(*line);
+	free(*arg_i);
 	words = ft_split(value, ' ');
 	free(*ms->matrix);
 	*ms->matrix = ft_calloc(ft_count_words(value, ' ') + 1, sizeof(char *));
 	while (words[++idx])
 		(*ms->matrix)[idx] = ft_strdup(words[idx]);
 	ft_free_str_array(words);
-	ms->track->phrase = -1;
+	ms->track->arg_i = -1;
 }

@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:40 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 16:54:09 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:41:40 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,23 @@ static int	ft_env_list_size(t_var *list)
 	return (count);
 }
 
-static void	ft_join_env_entry(t_var *env_var, char **env_array, int index)
+static void	ft_join_env_entry(t_var *env_var, char **env_array, int i)
 {
 	char	*temp;
 
 	if (env_var->scope)
 	{
-		temp = ft_nl_strjoin(env_array[index], env_var->name);
-		free(env_array[index]);
-		env_array[index] = temp;
+		temp = ft_nl_strjoin(env_array[i], env_var->name);
+		free(env_array[i]);
+		env_array[i] = temp;
 		if (env_var->value)
 		{
-			temp = ft_nl_strjoin(env_array[index], "=");
-			free(env_array[index]);
-			env_array[index] = temp;
-			temp = ft_nl_strjoin(env_array[index], env_var->value);
-			free(env_array[index]);
-			env_array[index] = temp;
+			temp = ft_nl_strjoin(env_array[i], "=");
+			free(env_array[i]);
+			env_array[i] = temp;
+			temp = ft_nl_strjoin(env_array[i], env_var->value);
+			free(env_array[i]);
+			env_array[i] = temp;
 		}
 	}
 }
@@ -50,24 +50,24 @@ void	ft_update_env_array(t_ms *ms)
 {
 	t_var	*original;
 	int		array_size;
-	int		index;
+	int		i;
 
 	array_size = ft_env_list_size(ms->locals);
-	if (ms->context)
-		ft_free_str_array(ms->context);
+	if (ms->current)
+		ft_free_str_array(ms->current);
 	if (!ms->locals)
 	{
-		ms->context = NULL;
+		ms->current = NULL;
 		return ;
 	}
-	ms->context = ft_calloc(1, sizeof(char *) * (array_size + 1));
+	ms->current = ft_calloc(1, sizeof(char *) * (array_size + 1));
 	original = ms->locals;
-	index = 0;
-	ms->context[index] = NULL;
+	i = 0;
+	ms->current[i] = NULL;
 	while (ms->locals)
 	{
-		ft_join_env_entry(ms->locals, ms->context, index);
-		index++;
+		ft_join_env_entry(ms->locals, ms->current, i);
+		i++;
 		ms->locals = ms->locals->next;
 	}
 	ms->locals = original;

@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:49:59 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 10:49:09 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:19:14 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_delete_token_pair(t_token **token, int name)
 		return ;
 	while (current && current->next)
 	{
-		if (current->index == name)
+		if (current->i == name)
 		{
 			ft_remove_token_pair(token, current, prev);
 			return ;

@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:05 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/03 12:55:09 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:35:19 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,26 +68,26 @@ static void	ft_remove_quotes(char *str, int *len)
 
 void	ft_expand_cmds(char ***cmds, t_ms *ms)
 {
-	ms->track->phrase = -1;
+	ms->track->arg_i = -1;
 	if (!cmds || !cmds[0] || !cmds[0][0])
 		return ;
 	ms->matrix = cmds;
-	while ((*cmds)[++ms->track->phrase])
+	while ((*cmds)[++ms->track->arg_i])
 	{
-		ms->processed = ft_is_present((*cmds)[ms->track->phrase], '$');
-		ft_expand_env_vars(ms, (*cmds)[ms->track->phrase] - 1,
-			&(*cmds)[ms->track->phrase]);
-		if (ms->track->phrase == -1)
+		ms->processed = ft_is_present((*cmds)[ms->track->arg_i], '$');
+		ft_expand_env_vars(ms, (*cmds)[ms->track->arg_i] - 1,
+			&(*cmds)[ms->track->arg_i]);
+		if (ms->track->arg_i == -1)
 			return ;
-		ms->len = ft_strlen((*cmds)[ms->track->phrase]);
-		ft_remove_quotes((*cmds)[ms->track->phrase], &ms->len);
-		if (!(*cmds)[ms->track->phrase][0] && ms->processed)
+		ms->len = ft_strlen((*cmds)[ms->track->arg_i]);
+		ft_remove_quotes((*cmds)[ms->track->arg_i], &ms->len);
+		if (!(*cmds)[ms->track->arg_i][0] && ms->processed)
 		{
-			free((*cmds)[ms->track->phrase]);
-			(*cmds)[ms->track->phrase] = NULL;
+			free((*cmds)[ms->track->arg_i]);
+			(*cmds)[ms->track->arg_i] = NULL;
 		}
 	}
-	if (ft_remove_null_entries(*cmds, ms->track->phrase) == ms->track->phrase)
+	if (ft_remove_null_entries(*cmds, ms->track->arg_i) == ms->track->arg_i)
 	{
 		free(*cmds);
 		*cmds = NULL;
