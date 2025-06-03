@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:49:47 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 17:13:11 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:47:01 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ void		*ft_memcpy(void *dest, const void *src, size_t n);
 void		ft_handle_redirections(t_ms *ms, t_cmd *node);
 void		ft_close(int fd);
 void		ft_close_all_fds(void);
+char		*ft_safe_getcwd(t_ms *ms, int error_code);
 void		ft_handle_exit(t_ms *ms);
 void		ft_check_empty_line(t_ms *ms);
 char		*ft_get_prompt(t_ms *ms);
@@ -184,8 +185,8 @@ void		ft_handle_hdoc_signal(int signo);
 char		*ft_strtok(char *str, char *delimiter);
 t_bool		ft_check_command(t_ms *ms, char **cmds);
 void		ft_execute_command(t_ms *ms, char **cmds);
-void		ft_cmd_not_found(t_ms *ms, const char *command);
-void		ft_cmd_not_exist(t_ms *ms, const char *cmd, int err_no, char *path);
+void		ft_cmd_error_exit(t_ms *ms, const char *cmd,
+				int err_no, char *path);
 void		ft_create_pipes(t_ms *ms);
 void		ft_close_pipes(t_ms *ms);
 t_bool		ft_is_absolute_path(char *path);
@@ -200,7 +201,6 @@ int			ft_export(t_ms *ms, char **cmds);
 void		ft_export_print(t_ms *ms);
 int			ft_pwd(t_ms *ms);
 int			ft_unset(t_ms *ms, char **cmds);
-
 t_bool		ft_is_parent(char **cmd);
 t_bool		ft_is_child(char **cmd);
 int			ft_route(t_ms *ms, char **cmds);
@@ -211,7 +211,7 @@ void		ft_free_str_array(char **matrix);
 void		ft_free_pipe_array(t_ms *ms);
 void		ft_cleanup_heredoc(t_ms *ms);
 void		ft_free_cmd_tree(t_cmd *home);
-void		ft_free_token_list_rev(t_token **tail);
+
 void		ft_cleanup_and_exit(t_ms *ms, int i);
 void		ft_handle_heredoc_eof(t_ms *ms, int fd);
 t_bool		ft_check_operator_sequence(t_token *lexer);

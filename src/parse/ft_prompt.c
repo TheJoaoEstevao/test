@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:51:28 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 17:11:41 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:47:05 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,7 @@ void	ft_check_empty_line(t_ms *ms)
 
 static char	*ft_get_current_dir(t_ms *ms)
 {
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	if (pwd == NULL)
-	{
-		ms->code = 1;
-		ft_error_msg("getcwd error: ", strerror(errno), NULL, NULL);
-	}
-	return (pwd);
+	return (ft_safe_getcwd(ms, 1));
 }
 
 char	*ft_get_prompt(t_ms *ms)

@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:10 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 17:10:33 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:58:36 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,28 @@ static t_bool	ft_check_home_path(t_ms *ms, char **cmds)
 	return (FALSE);
 }
 
+char	*ft_safe_getcwd(t_ms *ms, int error_code)
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	if (pwd == NULL)
+	{
+		ms->code = error_code;
+		ft_error_msg("getcwd error: ", strerror(errno), NULL, NULL);
+	}
+	return (pwd);
+}
+
 static int	ft_update_pwd(t_ms *ms)
 {
 	char	*current_path;
 
-	current_path = NULL;
-	current_path = getcwd(NULL, 0);
+	current_path = ft_safe_getcwd(ms, errno);
 	if (!current_path)
-	{
-		ms->code = errno;
-		ft_error_msg("getcwd error: ", strerror(errno), NULL, NULL);
 		return (errno);
-	}
 	ft_update_env_value(ms, "PWD", current_path);
 	free(current_path);
-	current_path = NULL;
 	return (0);
 }
 

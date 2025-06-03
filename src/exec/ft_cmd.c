@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:46 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 16:54:18 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:29:41 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_bool	ft_check_command(t_ms *ms, char **cmds)
 	{
 		cmd_path = ft_strdup(cmds[0]);
 		if (chdir(cmds[0]) == 0)
-			ft_cmd_not_exist(ms, cmds[0], 21, cmd_path);
+			ft_cmd_error_exit(ms, cmds[0], 21, cmd_path);
 	}
 	else if (cmds[0][0])
 		cmd_path = ft_find_command_path(cmds[0], ms);
@@ -70,7 +70,7 @@ void	ft_execute_command(t_ms *ms, char **cmds)
 	{
 		cmd_path = ft_strdup(cmds[0]);
 		if (chdir(cmds[0]) == 0)
-			ft_cmd_not_exist(ms, cmds[0], 21, cmd_path);
+			ft_cmd_error_exit(ms, cmds[0], 21, cmd_path);
 	}
 	else if (cmds[0][0])
 		cmd_path = ft_find_command_path(cmds[0], ms);

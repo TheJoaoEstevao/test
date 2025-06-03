@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_clean_three.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopedro3 <jopedro3@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:02 by jopedro3          #+#    #+#             */
-/*   Updated: 2024/12/02 16:50:03 by jopedro3         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:58:45 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,29 +47,6 @@ void	ft_free_cmd_tree(t_cmd *root)
 	ft_free_cmd_tree(root->left);
 	ft_free_cmd_tree(root->right);
 	free(root);
-}
-
-void	ft_free_token_list_rev(t_token **tail)
-{
-	t_token	*current;
-	t_token	*previous;
-
-	current = *tail;
-	previous = NULL;
-	if (!tail)
-		return ;
-	while (current)
-	{
-		previous = current->prev;
-		if (current->content)
-		{
-			free(current->content);
-			current->content = NULL;
-		}
-		free(current);
-		current = previous;
-	}
-	*tail = NULL;
 }
 
 void	ft_cleanup_and_exit(t_ms *sh, int exit_code)

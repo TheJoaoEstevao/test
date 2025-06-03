@@ -6,7 +6,7 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:51 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 16:28:14 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:28:40 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,16 @@ void	ft_handle_null_path(t_ms *ms, char **cmds)
 	if (ft_is_present(cmds[0], '/'))
 	{
 		if (access(cmds[0], F_OK))
-			ft_cmd_not_exist(ms, cmds[0], 2, NULL);
+			ft_cmd_error_exit(ms, cmds[0], 2, NULL);
 		else if (access(cmds[0], X_OK))
-			ft_cmd_not_exist(ms, cmds[0], 13, NULL);
+			ft_cmd_error_exit(ms, cmds[0], 13, NULL);
 		else
-			ft_cmd_not_exist(ms, cmds[0], 2, NULL);
+			ft_cmd_error_exit(ms, cmds[0], 2, NULL);
 	}
 	else if (cmds[0][0] == '=')
-		ft_cmd_not_found(ms, cmds[0]);
+		ft_cmd_error_exit(ms, cmds[0], 127, NULL);
 	else if (ft_is_present(cmds[0] + 1, '='))
 		ft_cleanup_and_exit(ms, 4);
 	else
-		ft_cmd_not_found(ms, cmds[0]);
+		ft_cmd_error_exit(ms, cmds[0], 127, NULL);
 }

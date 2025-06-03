@@ -6,42 +6,35 @@
 /*   By: jestevao <jestevao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:50:54 by jopedro3          #+#    #+#             */
-/*   Updated: 2025/06/02 12:50:29 by jestevao         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:29:10 by jestevao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ft_minishell.h"
 
-void	ft_cmd_not_found(t_ms *ms, const char *cmd)
-{
-	ft_putstr_fd("[minishell]: ", 2);
-	ft_putstr_fd((char *)cmd, 2);
-	ft_putstr_fd(": command not found\n", 2);
-	rl_clear_history();
-	ft_cleanup_and_exit(ms, 127);
-	exit(127);
-}
-
-void	ft_cmd_not_exist(t_ms *ms, const char *cmd, int err_no, char *path)
+void	ft_cmd_error_exit(t_ms *ms, const char *cmd, int err_no, char *path)
 {
 	if (path)
 		free(path);
-	ft_putstr_fd("[minishell]: ", 2);
-	ft_putstr_fd((char *)cmd, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(strerror(err_no), 2);
-	ft_putstr_fd("\n", 2);
-	ft_close_pipes(ms);
-	if (ms->in_fd != STDIN_FILENO)
-		ft_close(ms->in_fd);
-	if (ms->out_fd != STDOUT_FILENO)
-		ft_close(ms->out_fd);
+	if (err_no == 127)
+		ft_error_msg("", (char *)cmd, ": command not found", NULL);
+	else
+		ft_error_msg("", (char *)cmd, ": ", strerror(err_no));
+	if (err_no != 127)
+	{
+		ft_close_pipes(ms);
+		if (ms->in_fd != STDIN_FILENO)
+			ft_close(ms->in_fd);
+		if (ms->out_fd != STDOUT_FILENO)
+			ft_close(ms->out_fd);
+	}
 	rl_clear_history();
 	if (err_no == 13)
 		ft_cleanup_and_exit(ms, 126);
-	if (err_no == 2)
+	else if (err_no == 2 || err_no == 127)
 		ft_cleanup_and_exit(ms, 127);
-	ft_cleanup_and_exit(ms, err_no);
+	else
+		ft_cleanup_and_exit(ms, err_no);
 }
 
 void	ft_create_pipes(t_ms *ms)
